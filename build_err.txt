@@ -1,0 +1,46 @@
+﻿[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2151 modules transformed.
+node.exe : [31mΓ£ù[39m Build failed in 2.15s
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo          : NotSpecified: ([31mΓ£ù[39m Build f 
+   ailed in 2.15s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31merror during build:
+[31msrc/pages/Learn/QuizRunner.jsx (2:9): "MOCK_QUIZ" is not 
+exported by "src/data/mockData.js", imported by 
+"src/pages/Learn/QuizRunner.jsx".[31m
+file: [36mC:/educode/src/pages/Learn/QuizRunner.jsx:2:9[31m
+[33m
+1: import React, { useState } from 'react';
+2: import { MOCK_QUIZ } from '../../data/mockData';
+            ^
+3: import { motion, AnimatePresence } from 'framer-motion';
+4: import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Award } 
+from 'lucide-react';
+[31m
+    at getRollupError (file:///C:/educode/node_modules/rollup/dist/
+es/shared/parseAst.js:401:41)
+    at error (file:///C:/educode/node_modules/rollup/dist/es/shared
+/parseAst.js:397:42)
+    at Module.error (file:///C:/educode/node_modules/rollup/dist/es
+/shared/node-entry.js:17022:16)
+    at Module.traceVariable (file:///C:/educode/node_modules/rollup
+/dist/es/shared/node-entry.js:17478:29)
+    at ModuleScope.findVariable (file:///C:/educode/node_modules/ro
+llup/dist/es/shared/node-entry.js:15141:39)
+    at ReturnValueScope.findVariable (file:///C:/educode/node_modul
+es/rollup/dist/es/shared/node-entry.js:5688:38)
+    at FunctionBodyScope.findVariable (file:///C:/educode/node_modu
+les/rollup/dist/es/shared/node-entry.js:5688:38)
+    at Identifier.bind (file:///C:/educode/node_modules/rollup/dist
+/es/shared/node-entry.js:5462:40)
+    at VariableDeclarator.bind (file:///C:/educode/node_modules/rol
+lup/dist/es/shared/node-entry.js:2829:23)
+    at VariableDeclaration.bind (file:///C:/educode/node_modules/ro
+llup/dist/es/shared/node-entry.js:2825:28)[39m

@@ -1,0 +1,522 @@
+const NATIVE_SYNTAX = {
+    python: { print: 'print("Hello Python")', solution: 'print', forbidden: [';', 'console.log', 'System.out', 'printf'], context: 'Indentation and Scripting' },
+    javascript: { print: 'console.log("Hello JS");', solution: 'console.log', forbidden: ['System.out', 'printf', 'echo'], context: 'Event Loop and DOM' },
+    java: { print: 'System.out.println("Hello Java");', solution: 'System.out.println', forbidden: ['console.log', 'print(', 'printf'], context: 'JVM and Objects' },
+    cpp: { print: 'std::cout << "Hello C++" << std::endl;', solution: 'cout', forbidden: ['console.log', 'System.out', 'print('], context: 'Pointers and STL' },
+    c: { print: 'printf("Hello C\\n");', solution: 'printf', forbidden: ['console.log', 'System.out', 'std::cout'], context: 'Direct Memory and Headers' },
+    sql: { print: 'SELECT * FROM users;', solution: 'SELECT', forbidden: ['print', 'console.log', 'var '], context: 'Relational Sets' },
+    go: { print: 'fmt.Println("Hello Go")', solution: 'fmt', forbidden: ['console.log', 'System.out', 'static '], context: 'Goroutines and Slices' },
+    rust: { print: 'println!("Hello Rust");', solution: 'println!', forbidden: ['console.log', 'System.out', 'NULL'], context: 'Ownership and Borrowing' },
+    php: { print: 'echo "Hello PHP";', solution: 'echo', forbidden: ['console.log', 'System.out', 'System.err'], context: 'Server-side Scripting' },
+    ruby: { print: 'puts "Hello Ruby"', solution: 'puts', forbidden: ['console.log', 'System.out', 'printf'], context: 'Elegant Objects' },
+    swift: { print: 'print("Hello Swift")', solution: 'print', forbidden: ['console.log', 'System.out', 'printf'], context: 'iOS and Optionals' },
+    kotlin: { print: 'println("Hello Kotlin")', solution: 'println', forbidden: ['console.log', 'System.out', 'printf'], context: 'Interoperability and Null Safety' },
+    dart: { print: 'print("Hello Dart");', solution: 'print', forbidden: ['console.log', 'System.out', 'printf'], context: 'Flutter and Asynchrony' },
+    r: { print: 'print("Hello R")', solution: 'print', forbidden: ['console.log', 'System.out', 'printf'], context: 'Statistical Computing' },
+    scala: { print: 'println("Hello Scala")', solution: 'println', forbidden: ['console.log', 'System.out', 'printf'], context: 'Functional JVM' },
+    perl: { print: 'print "Hello Perl\\n";', solution: 'print', forbidden: ['console.log', 'System.out', 'printf'], context: 'RegEx and Scripting' },
+    haskell: { print: 'putStrLn "Hello Haskell"', solution: 'putStrLn', forbidden: ['console.log', 'System.out', 'printf'], context: 'Pure Functions' },
+    lua: { print: 'print("Hello Lua")', solution: 'print', forbidden: ['console.log', 'System.out', 'printf'], context: 'Embedded Scripting' },
+    matlab: { print: 'disp("Hello MATLAB")', solution: 'disp', forbidden: ['console.log', 'System.out', 'printf'], context: 'Matrix Ops' },
+};
+
+const PYTHON_PROFESSIONAL_CONTENT = {
+    "Variables": {
+        theory: `
+            <h3>Python Variables: Dynamic Typing and Memory Management</h3>
+            <p><strong>Real-World Context:</strong> In production systems like Instagram (built with Python), variables handle millions of user sessions, posts, and interactions simultaneously.</p>
+            
+            <h4>Core Concepts:</h4>
+            <ul>
+                <li><strong>Dynamic Typing:</strong> Python determines variable types at runtime</li>
+                <li><strong>Reference Semantics:</strong> Variables are references to objects in memory</li>
+                <li><strong>Mutable vs Immutable:</strong> Strings and integers are immutable; lists and dicts are mutable</li>
+            </ul>
+
+            <h4>Professional Example - E-commerce Cart:</h4>
+            <pre><code>class ShoppingCart:
+    def __init__(self, customer_id):
+        self.customer_id = customer_id
+        self.items = []
+        self.total = 0.0
+    
+    def add_item(self, name, price, qty=1):
+        self.items.append({'product': name, 'price': price})
+        self.total += price * qty
+
+cart = ShoppingCart(12345)
+cart.add_item("Python Book", 49.99, 2)
+print(f"Total: ${cart.total}")</code></pre>
+
+            <p><strong>Memory Tip:</strong> Use __slots__ for classes to reduce memory by 40-50%</p>
+        `,
+        videos: [
+            { title: "Python Variables - Corey Schafer", url: "https://www.youtube.com/watch?v=cQT33yu9pY8" },
+            { title: "Memory Management in Python", url: "https://www.youtube.com/watch?v=_AEJHKGk9ns" }
+        ]
+    },
+    "Control": {
+        theory: `
+            <h3>Control Flow: Decision Making in Python</h3>
+            <p><strong>Industry Use:</strong> Netflix uses complex control flow to determine content recommendations based on user behavior.</p>
+            
+            <h4>Python Control Features:</h4>
+            <ul>
+                <li><strong>Truthiness:</strong> Empty lists evaluate to False</li>
+                <li><strong>Walrus Operator:</strong> Assign and evaluate in one line (Python 3.8+)</li>
+                <li><strong>Match-Case:</strong> Pattern matching (Python 3.10+)</li>
+            </ul>
+
+            <h4>Real Example - User Authentication:</h4>
+            <pre><code>def authenticate(username, password):
+    users = {
+        "admin": {"pw": "hash123", "role": "admin"},
+        "user": {"pw": "hash456", "role": "user"}
+    }
+    
+    if user := users.get(username):
+        if user["pw"] == password:
+            match user["role"]:
+                case "admin":
+                    return {"access": "full"}
+                case "user":
+                    return {"access": "limited"}
+    return {"error": "Invalid credentials"}</code></pre>
+
+            <p><strong>Performance:</strong> Use dictionaries for 4+ conditions instead of if-elif chains</p>
+        `,
+        videos: [
+            { title: "Python Control Flow - Mosh", url: "https://www.youtube.com/watch?v=HZARImviDxg" },
+            { title: "Match-Case Explained", url: "https://www.youtube.com/watch?v=ASRqxDGutpA" }
+        ]
+    },
+    "Loops": {
+        theory: `
+            <h3>Python Loops: Iteration Mastery</h3>
+            <p><strong>Production Use:</strong> Spotify processes millions of songs using efficient loop patterns for playlists and recommendations.</p>
+            
+            <h4>Loop Advantages:</h4>
+            <ul>
+                <li><strong>List Comprehensions:</strong> 30-40% faster than loops</li>
+                <li><strong>Generators:</strong> Memory-efficient for large datasets</li>
+                <li><strong>enumerate():</strong> Get index and value together</li>
+            </ul>
+
+            <h4>Real Example - Data Processing:</h4>
+            <pre><code># Traditional loop (slower)
+premium = []
+for user in users:
+    if user["purchases"] > 20:
+        premium.append(user["name"])
+
+# List comprehension (faster)
+premium = [u["name"] for u in users if u["purchases"] > 20]
+
+# Generator (memory efficient)
+def get_premium(data):
+    for user in data:
+        if user["purchases"] > 20:
+            yield user["name"]</code></pre>
+
+            <p><strong>Best Practice:</strong> Use generators for processing large datasets to save memory</p>
+        `,
+        videos: [
+            { title: "Python Loops - Tech With Tim", url: "https://www.youtube.com/watch?v=94UHCEmprCY" },
+            { title: "List Comprehensions", url: "https://www.youtube.com/watch?v=AhSvKGTh28Q" }
+        ]
+    },
+    "Functions": {
+        theory: `
+            <h3>Python Functions: First-Class Citizens</h3>
+            <p><strong>Enterprise Use:</strong> Google uses decorators and higher-order functions for logging and caching across microservices.</p>
+            
+            <h4>Advanced Features:</h4>
+            <ul>
+                <li><strong>Decorators:</strong> Modify function behavior</li>
+                <li><strong>*args and **kwargs:</strong> Flexible arguments</li>
+                <li><strong>Closures:</strong> Functions remember enclosing scope</li>
+            </ul>
+
+            <h4>Production Example - Rate Limiting:</h4>
+            <pre><code>from functools import wraps
+import time
+
+def rate_limit(max_calls=10):
+    calls = []
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args):
+            now = time.time()
+            calls[:] = [c for c in calls if c > now - 60]
+            if len(calls) >= max_calls:
+                raise Exception("Rate limit exceeded")
+            calls.append(now)
+            return func(*args)
+        return wrapper
+    return decorator
+
+@rate_limit(max_calls=5)
+def api_call(endpoint):
+    return f"Calling {endpoint}"</code></pre>
+
+            <p><strong>Caching Tip:</strong> Use @lru_cache for 10000x speedup on repeated calls</p>
+        `,
+        videos: [
+            { title: "Python Functions - Corey Schafer", url: "https://www.youtube.com/watch?v=9Os0o3wzS_I" },
+            { title: "Decorators Explained", url: "https://www.youtube.com/watch?v=FsAPt_9Bf3U" }
+        ]
+    }
+};
+"Variables": {
+    theory: `
+            <h3>Python Variables: Dynamic Typing & Memory Management</h3>
+            <p><strong>Real-World Context:</strong> In production systems like Instagram (built with Python), variables handle millions of user sessions, posts, and interactions simultaneously. Understanding Python's dynamic typing is crucial for building scalable applications.</p>
+            
+            <h4>Core Concepts:</h4>
+            <ul>
+                <li><strong>Dynamic Typing:</strong> Python determines variable types at runtime, not compile time</li>
+                <li><strong>Reference Semantics:</strong> Variables are references to objects in memory</li>
+                <li><strong>Mutable vs Immutable:</strong> Strings, integers, tuples are immutable; lists, dicts are mutable</li>
+            </ul>
+
+            <h4>Professional Example - E-commerce Cart System:</h4>
+            <pre><code>class ShoppingCart:
+    def __init__(self, customer_id):
+        self.customer_id = customer_id  # Immutable identifier
+        self.items = []  # Mutable list for cart items
+        self.total = 0.0  # Float for price calculation
+    
+    def add_item(self, product_name, price, quantity=1):
+        item = {
+            'product': product_name,
+            'price': price,
+            'qty': quantity
+        }
+        self.items.append(item)
+        self.total += price * quantity
+        return f"Added {quantity}x {product_name} to cart"
+
+# Real usage
+cart = ShoppingCart(customer_id=12345)
+cart.add_item("Python Programming Book", 49.99, 2)
+print(f"Cart Total: ${cart.total}")</code></pre>
+
+            <h4>Memory Optimization Tips:</h4>
+            <p>Use <code>__slots__</code> for classes with fixed attributes to reduce memory overhead by 40-50% in large-scale applications.</p>
+        `,
+        videos: [
+            { title: "Python Variables & Memory Management - Corey Schafer", url: "https://www.youtube.com/watch?v=cQT33yu9pY8" },
+            { title: "Advanced Python: Understanding References", url: "https://www.youtube.com/watch?v=_AEJHKGk9ns" }
+        ]
+},
+"Control": {
+    theory: `
+            <h3>Control Flow: Decision Making in Python</h3>
+            <p><strong>Industry Application:</strong> Netflix uses complex control flow logic to determine which content to recommend based on user behavior, time of day, and viewing history.</p>
+            
+            <h4>Python's Unique Control Features:</h4>
+            <ul>
+                <li><strong>Truthiness:</strong> Python evaluates objects in boolean context (empty lists = False)</li>
+                <li><strong>Walrus Operator (:=):</strong> Assign and evaluate in one line (Python 3.8+)</li>
+                <li><strong>Match-Case:</strong> Structural pattern matching (Python 3.10+)</li>
+            </ul>
+
+            <h4>Real-World Example - User Authentication System:</h4>
+            <pre><code>def authenticate_user(username, password, role="user"):
+    # Database lookup simulation
+    user_db = {
+        "admin": {"password": "hashed_pw_123", "role": "admin"},
+        "john": {"password": "hashed_pw_456", "role": "user"}
+    }
+    
+    # Walrus operator for efficient checking
+    if (user := user_db.get(username)) and user["password"] == password:
+        match user["role"]:
+            case "admin":
+                return {"access": "full", "dashboard": "/admin"}
+            case "user":
+                return {"access": "limited", "dashboard": "/user"}
+            case _:
+                return {"access": "denied"}
+    else:
+        return {"error": "Invalid credentials"}
+
+# Usage
+result = authenticate_user("admin", "hashed_pw_123")
+print(result)  # {'access': 'full', 'dashboard': '/admin'}</code></pre>
+
+            <h4>Performance Tip:</h4>
+            <p>Use <code>if-elif-else</code> chains for 2-3 conditions, but switch to dictionaries for 4+ conditions for O(1) lookup time.</p>
+        `,
+        videos: [
+            { title: "Python Control Flow - Programming with Mosh", url: "https://www.youtube.com/watch?v=HZARImviDxg" },
+            { title: "Match-Case Statement Explained", url: "https://www.youtube.com/watch?v=ASRqxDGutpA" }
+        ]
+},
+"Loops": {
+    theory: `
+            <h3>Python Loops: Iteration Mastery</h3>
+            <p><strong>Production Use Case:</strong> Spotify processes millions of songs daily using efficient loop patterns to generate playlists, analyze listening patterns, and recommend music.</p>
+            
+            <h4>Python Loop Advantages:</h4>
+            <ul>
+                <li><strong>List Comprehensions:</strong> 30-40% faster than traditional loops</li>
+                <li><strong>Generator Expressions:</strong> Memory-efficient for large datasets</li>
+                <li><strong>enumerate():</strong> Pythonic way to get index + value</li>
+                <li><strong>zip():</strong> Parallel iteration over multiple sequences</li>
+            </ul>
+
+            <h4>Real Example - Data Processing Pipeline:</h4>
+            <pre><code># Processing 1 million user records efficiently
+user_data = [
+    {"name": "Alice", "age": 28, "purchases": 45},
+    {"name": "Bob", "age": 34, "purchases": 12},
+    # ... millions more
+]
+
+# Traditional loop (slower)
+premium_users = []
+for user in user_data:
+    if user["purchases"] > 20:
+        premium_users.append(user["name"])
+
+# List comprehension (faster)
+premium_users = [u["name"] for u in user_data if u["purchases"] > 20]
+
+# Generator for memory efficiency (best for large data)
+def get_premium_users(data):
+    for user in data:
+        if user["purchases"] > 20:
+            yield user["name"]
+
+# Process in batches
+for name in get_premium_users(user_data):
+    send_premium_offer(name)  # Process one at a time</code></pre>
+
+            <h4>Advanced Pattern - Parallel Processing:</h4>
+            <pre><code>from concurrent.futures import ThreadPoolExecutor
+
+def process_batch(batch):
+    return [item * 2 for item in batch]
+
+data = range(1000000)
+batch_size = 10000
+
+with ThreadPoolExecutor(max_workers=4) as executor:
+    batches = [data[i:i+batch_size] for i in range(0, len(data), batch_size)]
+    results = list(executor.map(process_batch, batches))</code></pre>
+        `,
+        videos: [
+            { title: "Python Loops & Iteration - Tech With Tim", url: "https://www.youtube.com/watch?v=94UHCEmprCY" },
+            { title: "List Comprehensions vs Loops Performance", url: "https://www.youtube.com/watch?v=AhSvKGTh28Q" }
+        ]
+},
+"Functions": {
+    theory: `
+            <h3>Python Functions: First-Class Citizens</h3>
+            <p><strong>Enterprise Example:</strong> Google's internal Python codebase uses decorators and higher-order functions extensively for logging, authentication, and caching across microservices.</p>
+            
+            <h4>Advanced Function Features:</h4>
+            <ul>
+                <li><strong>Decorators:</strong> Modify function behavior without changing code</li>
+                <li><strong>*args & **kwargs:</strong> Flexible argument handling</li>
+                <li><strong>Lambda Functions:</strong> Anonymous functions for callbacks</li>
+                <li><strong>Closures:</strong> Functions that remember enclosing scope</li>
+            </ul>
+
+            <h4>Production Example - API Rate Limiting:</h4>
+            <pre><code>import time
+from functools import wraps
+
+def rate_limit(max_calls=10, time_window=60):
+    """Decorator to limit function calls per time window"""
+    calls = []
+    
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            now = time.time()
+            # Remove old calls outside time window
+            calls[:] = [c for c in calls if c > now - time_window]
+            
+            if len(calls) >= max_calls:
+                raise Exception(f"Rate limit exceeded: {max_calls} calls per {time_window}s")
+            
+            calls.append(now)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@rate_limit(max_calls=5, time_window=10)
+def api_call(endpoint):
+    return f"Calling {endpoint}"
+
+# Usage
+for i in range(7):
+    try:
+        print(api_call(f"/api/data/{i}"))
+    except Exception as e:
+        print(f"Error: {e}")</code></pre>
+
+            <h4>Caching for Performance:</h4>
+            <pre><code>from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# 10000x faster for repeated calls
+print(fibonacci(100))  # Instant result</code></pre>
+        `,
+        videos: [
+            { title: "Python Functions Deep Dive - Corey Schafer", url: "https://www.youtube.com/watch?v=9Os0o3wzS_I" },
+            { title: "Decorators Explained - Real Python", url: "https://www.youtube.com/watch?v=FsAPt_9Bf3U" }
+        ]
+}
+};
+
+const TOPIC_TEMPLATES = {
+    "Variables": {
+        python: 'username = "Alex"\nage = 25\nprint(f"{username} is {age}")',
+        javascript: 'let username = "Alex";\nconst age = 25;\nconsole.log(`${username} is ${age}`);',
+        java: 'String username = "Alex";\nint age = 25;\nSystem.out.println(username + " is " + age);',
+        cpp: 'std::string username = "Alex";\nint age = 25;\nstd::cout << username << " is " << age << std::endl;',
+        c: 'char username[] = "Alex";\nint age = 25;\nprintf("%s is %d\\n", username, age);',
+        go: 'username := "Alex"\nage := 25\nfmt.Printf("%s is %d\\n", username, age)',
+        sql: 'DECLARE @Username NVARCHAR(50) = "Alex";\nSELECT @Username AS Name;',
+        rust: 'let username = "Alex";\nlet age = 25;\nprintln!("{} is {}", username, age);'
+    },
+    "Control": {
+        python: 'if age > 18:\n    print("Adult")\nelse:\n    print("Minor")',
+        javascript: 'if (age > 18) {\n    console.log("Adult");\n} else {\n    console.log("Minor");\n}',
+        java: 'if (age > 18) {\n    System.out.println("Adult");\n} else {\n    System.out.println("Minor");\n}',
+        cpp: 'if (age > 18) {\n    std::cout << "Adult" << std::endl;\n} else {\n    std::cout << "Minor" << std::endl;\n}',
+        go: 'if age > 18 {\n    fmt.Println("Adult")\n} else {\n    fmt.Println("Minor")\n}',
+        sql: 'SELECT CASE WHEN Age > 18 THEN "Adult" ELSE "Minor" END AS Status FROM Users;',
+        rust: 'if age > 18 {\n    println!("Adult");\n} else {\n    println!("Minor");\n}'
+    },
+    "Loops": {
+        python: 'for i in range(5):\n    print(f"Iteration: {i}")',
+        javascript: 'for (let i = 0; i < 5; i++) {\n    console.log(`Iteration: ${i}`);\n}',
+        java: 'for (int i = 0; i < 5; i++) {\n    System.out.println("Iteration: " + i);\n}',
+        cpp: 'for (int i = 0; i < 5; i++) {\n    std::cout << "Iteration: " << i << std::endl;\n}',
+        go: 'for i := 0; i < 5; i++ {\n    fmt.Println("Iteration:", i)\n}',
+        sql: '-- Iterating over rows in a table\nSELECT * FROM Records LIMIT 5;',
+        rust: 'for i in 0..5 {\n    println!("Iteration: {}", i);\n}'
+    },
+    "Functions": {
+        python: 'def greet(name):\n    return f"Hello {name}"\n\nprint(greet("Student"))',
+        javascript: 'function greet(name) {\n    return `Hello ${name}`;\n}\nconsole.log(greet("Student"));',
+        java: 'public static String greet(String name) {\n    return "Hello " + name;\n}\n// Call inside main',
+        cpp: 'std::string greet(std::string name) {\n    return "Hello " + name;\n}',
+        go: 'func greet(name string) string {\n    return "Hello " + name\n}',
+        sql: 'CREATE FUNCTION Greet(@Name NVARCHAR(50)) RETURNS NVARCHAR(100) AS BEGIN RETURN "Hello " + @Name END;',
+        rust: 'fn greet(name: &str) -> String {\n    format!("Hello {}", name)\n}'
+    }
+};
+
+export const LANGUAGES = [
+    { id: 'python', name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', tag: 'Beginner', color: '#3776AB', forbidden: NATIVE_SYNTAX.python.forbidden, description: 'Interpreted, high-level, general-purpose language.' },
+    { id: 'javascript', name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', tag: 'Beginner', color: '#F7DF1E', forbidden: NATIVE_SYNTAX.javascript.forbidden, description: 'High-level, multi-paradigm language.' },
+    { id: 'java', name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', color: '#007396', forbidden: NATIVE_SYNTAX.java.forbidden, description: 'Class-based, object-oriented language.' },
+    { id: 'cpp', name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', tag: 'Advanced', color: '#00599C', forbidden: NATIVE_SYNTAX.cpp.forbidden, description: 'Low-level memory manipulation features.' },
+    { id: 'c', name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', color: '#A8B9CC', forbidden: NATIVE_SYNTAX.c.forbidden, description: 'Procedural computer programming language.' },
+    { id: 'sql', name: 'SQL', icon: 'https://www.svgrepo.com/show/331760/sql-database-generic.svg', color: '#336791', forbidden: NATIVE_SYNTAX.sql.forbidden, description: 'Domain-specific language for managing data.' },
+    { id: 'go', name: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg', color: '#00ADD8', forbidden: NATIVE_SYNTAX.go.forbidden, description: 'Statically typed, compiled language from Google.' },
+    { id: 'rust', name: 'Rust', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg', color: '#000000', forbidden: NATIVE_SYNTAX.rust.forbidden, description: 'Focused on safety and performance.' },
+    { id: 'php', name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', color: '#777BB4', forbidden: NATIVE_SYNTAX.php.forbidden, description: 'Server-side scripting language.' },
+    { id: 'swift', name: 'Swift', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg', color: '#F05138', forbidden: NATIVE_SYNTAX.swift.forbidden, description: 'Powerful iOS development language.' },
+    { id: 'kotlin', name: 'Kotlin', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg', color: '#7F52FF', forbidden: NATIVE_SYNTAX.kotlin.forbidden, description: 'Modern Android development language.' },
+    { id: 'ruby', name: 'Ruby', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg', color: '#CC342D', forbidden: NATIVE_SYNTAX.ruby.forbidden, description: 'Dynamic, open-source programming language.' },
+    { id: 'dart', name: 'Dart', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg', color: '#0175C2', forbidden: NATIVE_SYNTAX.dart.forbidden, description: 'Client-optimized for fast apps.' },
+];
+
+export const LEVELS = [
+    { id: 'beginner', name: 'Beginner', description: 'Fundamentals & Foundations' },
+    { id: 'intermediate', name: 'Intermediate', description: 'Applied Concepts & Techniques' },
+    { id: 'advanced', name: 'Advanced', description: 'Expert-level & Professional Architecture' },
+];
+
+const generateUniqueContent = (langId, level, index, title) => {
+    const lang = LANGUAGES.find(l => l.id === langId) || LANGUAGES[0];
+    const syntax = NATIVE_SYNTAX[langId] || NATIVE_SYNTAX.python;
+    const example = TOPIC_TEMPLATES[title]?.[langId] || syntax.print;
+
+    // Use enhanced Python content if available
+    const pythonContent = langId === 'python' && PYTHON_PROFESSIONAL_CONTENT[title];
+
+    const descriptions = {
+        "Setup": `Learn how to configure the ${lang.name} development environment. Every language has its own unique entry point and file structure.`,
+        "Variables": `Variables in ${lang.name} are the foundation of data storage. Learn the native types and naming conventions unique to this ecosystem.`,
+        "Control": `Master the logic flow in ${lang.name}. Use native conditional statements to control how your application behaves.`,
+        "Loops": `Efficiency is key. Use ${lang.name}'s native iteration patterns to handle repetitive tasks elegantly.`,
+        "Collections": `Storing multiple items requires understanding ${lang.name}-specific data structures like arrays, lists, or dictionaries.`,
+        "Functions": `Organize your code into reusable native blocks. Learn how ${lang.name} handles scopes and parameters.`,
+        "Errors": `Professional code is stable code. Learn how to handle exceptions and errors using ${lang.name}'s native mechanisms.`,
+        "Files": `Interact with the system. Learn how ${lang.name} performs native I/O operations with files and streams.`,
+        "Concurrency": `Handle multiple tasks at once. Explore the ${lang.name} model for parallel or asynchronous execution.`,
+        "Final": `Apply everything you've learned to build a professional-grade ${lang.name} application that follows industry best practices.`
+    };
+
+    return {
+        id: `${langId}-${level}-${index}`,
+        title: `${lang.name} ${title}`,
+        level: level,
+        type: 'coding',
+        content: pythonContent ? pythonContent.theory : `
+            <h3>${lang.name} Programming: ${title}</h3>
+            <p>${descriptions[title] || `Master the professional idioms of ${lang.name}. This ${level} module is strictly tailored for <sup>${lang.name}</sup>.`}</p>
+            <h3>Native Language Example</h3>
+            <div class="example-box">
+                <pre><code>${example}</code></pre>
+            </div>
+            <p>Study the example above. It demonstrates the idiomatic way to handle <strong>${title}</strong> in ${lang.name}. Unlike other languages, ${lang.name} values specific patterns that are demonstrated here.</p>
+        `,
+        questions: Array.from({ length: 5 }, (_, i) => ({
+            id: i + 1,
+            prompt: `[${lang.name}] Apply correct native logic for ${title} exercise ${i + 1}. Ensure you use proper ${lang.name} identifiers and keywords.`,
+            template: langId === 'java' ? "public class Main {\n  public static void main(String[] args) {\n    // Implementation here\n  }\n}" :
+                langId === 'go' ? "package main\nimport \"fmt\"\n\nfunc main() {\n  // Implementation here\n}" :
+                    langId === 'c' ? "#include <stdio.h>\n\nint main() {\n  // Implementation here\n  return 0;\n}" :
+                        langId === 'cpp' ? "#include <iostream>\n\nint main() {\n  // Implementation here\n  return 0;\n}" : "",
+            solution: syntax.solution
+        })),
+        videos: pythonContent?.videos || []
+    };
+};
+
+export const getCurriculum = (langId) => {
+    const categories = ['beginner', 'intermediate', 'advanced'];
+    const baseTitles = ["Setup", "Variables", "Control", "Loops", "Collections", "Functions", "Errors", "Files", "Concurrency", "Final"];
+
+    let curriculum = [];
+    categories.forEach(level => {
+        baseTitles.forEach((title, i) => {
+            curriculum.push(generateUniqueContent(langId, level, i, title));
+        });
+    });
+    return curriculum;
+};
+
+export const MOCK_PRACTICE_PROBLEMS = [
+    {
+        id: 1,
+        title: "Hello World Challenge",
+        description: "Write your first program that outputs 'Hello, World!' to the console.",
+        difficulty: "Beginner",
+        timeLimit: "5 mins",
+        points: 100,
+        hint: "Each language has its own print function. Python uses print(), Java uses System.out.println().",
+        initialCode: {
+            python: "print('Hello, World!')",
+            javascript: "console.log('Hello, World!');",
+            java: "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}",
+            cpp: "#include <iostream>\n\nint main() {\n  std::cout << \"Hello, World!\" << std::endl;\n  return 0;\n}",
+            c: "#include <stdio.h>\n\nint main() {\n  printf(\"Hello, World!\\n\");\n  return 0;\n}",
+            go: "package main\nimport \"fmt\"\n\nfunc main() {\n  fmt.Println(\"Hello, World!\")\n}",
+            rust: "fn main() {\n  println!(\"Hello, World!\");\n}"
+        }
+    }
+];
