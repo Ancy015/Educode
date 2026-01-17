@@ -3,10 +3,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #0a0a0b;
+  color: #f8fafc;
 }
 
 main {
   flex: 1;
+  background-color: #0a0a0b;
 }
 
 /* Animations */
@@ -24,4 +27,82 @@ main {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Lesson Content Styling */
+.lesson-content * {
+  color: #ffffff !important;
+}
+
+.lesson-content h1,
+.lesson-content h2,
+.lesson-content h3,
+.lesson-content h4 {
+  color: #ffffff !important;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.lesson-content p {
+  color: #e5e7eb !important;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  color: #e5e7eb !important;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.lesson-content li {
+  color: #e5e7eb !important;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-content strong {
+  color: #60a5fa !important;
+  font-weight: 600;
+}
+
+.lesson-content code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: #fbbf24 !important;
+  font-family: 'Courier New', monospace;
+}
+
+.lesson-content pre {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.lesson-content pre code {
+  background: transparent;
+  padding: 0;
+  color: #e5e7eb !important;
+}
+
+.lesson-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-content th,
+.lesson-content td {
+  color: #ffffff !important;
+  border: 1px solid #374151;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.lesson-content th {
+  background: rgba(59, 130, 246, 0.1);
+  font-weight: 600;
 }

@@ -7,6 +7,11 @@ import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-ruby';
 import 'prismjs/themes/prism-tomorrow.css';
 import { MOCK_PRACTICE_PROBLEMS, LANGUAGES } from '../../data/mockData';
 import { Play, RotateCcw, Lightbulb, ChevronRight, CheckCircle } from 'lucide-react';
@@ -89,7 +94,12 @@ const PracticeArena = ({ language }) => {
                                 javascript: languages.javascript,
                                 java: languages.java,
                                 c: languages.c,
-                                cpp: languages.cpp
+                                cpp: languages.cpp,
+                                go: languages.go,
+                                sql: languages.sql,
+                                rust: languages.rust,
+                                php: languages.php,
+                                ruby: languages.ruby
                             };
                             const grammar = grammars[langId] || languages.clike || languages.plain;
                             try {

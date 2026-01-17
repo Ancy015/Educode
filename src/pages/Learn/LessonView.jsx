@@ -162,23 +162,25 @@ const LessonView = () => {
             <div style={{ flex: 1, overflow: 'hidden', display: 'flex' }}>
                 <div style={{ flex: 1, overflowY: 'auto', padding: '3rem 4rem', maxWidth: activeTab === 'practice' ? '600px' : 'none', borderRight: activeTab === 'practice' ? '1px solid var(--border)' : 'none' }}>
                     {activeTab === 'learn' && (
-                        <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="lesson-content prose">
-                            <div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+                        <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="lesson-content prose" style={{ color: '#ffffff' }}>
+                            <div dangerouslySetInnerHTML={{ __html: lesson.content }} style={{ color: '#ffffff' }} />
                         </Motion.div>
                     )}
 
                     {activeTab === 'video' && (
                         <Motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                             <h2 style={{ marginBottom: '2rem' }}>Recommended Learning Videos</h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                                {lesson.videos.map((vid, i) => (
-                                    <div key={i} className="card" style={{ padding: '1rem' }}>
-                                        <div style={{ width: '100%', aspectRatio: '16/9', background: 'black', borderRadius: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
-                                            <iframe width="100%" height="100%" src={vid.url} frameBorder="0" allowFullScreen></iframe>
-                                        </div>
-                                        <h4 style={{ fontSize: '1rem' }}>{vid.title}</h4>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
+                                {lesson.videos && lesson.videos.length > 0 ? lesson.videos.map((vid, i) => (
+                                    <div key={i} className="card" style={{ padding: '1.5rem', borderLeft: '4px solid var(--secondary)' }}>
+                                        <h4 style={{ fontSize: '1.1rem', marginBottom: '0.75rem', color: '#ffffff' }}>{vid.title}</h4>
+                                        <a href={vid.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}>
+                                            Watch on YouTube <Video size={18} />
+                                        </a>
                                     </div>
-                                ))}
+                                )) : (
+                                    <p style={{ color: 'var(--text-muted)' }}>No videos available for this topic yet.</p>
+                                )}
                             </div>
                         </Motion.div>
                     )}
@@ -201,8 +203,8 @@ const LessonView = () => {
                                 ))}
                             </div>
 
-                            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Question {currentQuestion.id} of 5</h2>
-                            <p style={{ fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.6, color: 'var(--text-main)' }}>{currentQuestion.prompt}</p>
+                            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: '#ffffff' }}>Question {currentQuestion.id} of 5</h2>
+                            <p style={{ fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.6, color: '#ffffff' }}>{currentQuestion.prompt}</p>
 
                             {currentQuestion.type === 'mcq' ? (
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -257,7 +259,7 @@ const LessonView = () => {
                                     Previous
                                 </button>
 
-                                {currentQuestion.type === 'coding' && (
+                                {currentQuestion.type !== 'mcq' && (
                                     <button onClick={handleRunCode} className="btn btn-primary" style={{ background: 'var(--accent)', border: 'none' }} disabled={isRunning}>
                                         {isRunning ? 'Validating...' : 'Run & Check Answer'}
                                     </button>

@@ -89,7 +89,7 @@ const QuizRunner = () => {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                 >
-                    <h3 style={{ fontSize: '1.75rem', marginBottom: '2.5rem' }}>{currentQuestion.question}</h3>
+                    <h3 style={{ fontSize: '1.75rem', marginBottom: '2.5rem', color: '#ffffff' }}>{currentQuestion.prompt}</h3>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {currentQuestion.options.map((option, idx) => {
@@ -127,7 +127,7 @@ const QuizRunner = () => {
                                         cursor: isAnswered ? 'default' : 'pointer'
                                     }}
                                 >
-                                    <span style={{ fontWeight: 500 }}>{option}</span>
+                                    <span style={{ fontWeight: 500, color: '#ffffff' }}>{option}</span>
                                     {isAnswered && isCorrect && <CheckCircle2 color="var(--secondary)" size={20} />}
                                     {isAnswered && isSelected && !isCorrect && <XCircle color="var(--danger)" size={20} />}
                                 </button>
