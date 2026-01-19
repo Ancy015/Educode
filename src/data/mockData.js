@@ -6011,7 +6011,13 @@ const generateUniqueContent = (langId, level, index, title) => {
         || (langId === 'cpp' && level === 'advanced' && CPP_ADVANCED_CONTENT[title])
         || (langId === 'c' && level === 'beginner' && C_BEGINNER_CONTENT[title])
         || (langId === 'c' && level === 'intermediate' && C_INTERMEDIATE_CONTENT[title])
-        || (langId === 'c' && level === 'advanced' && C_ADVANCED_CONTENT[title]);
+        || (langId === 'c' && level === 'advanced' && C_ADVANCED_CONTENT[title])
+        || (langId === 'csharp' && level === 'beginner' && CSHARP_BEGINNER_CONTENT[title])
+        || (langId === 'csharp' && level === 'intermediate' && CSHARP_INTERMEDIATE_CONTENT[title])
+        || (langId === 'csharp' && level === 'advanced' && CSHARP_ADVANCED_CONTENT[title])
+        || (langId === 'go' && level === 'beginner' && GO_BEGINNER_CONTENT[title])
+        || (langId === 'go' && level === 'intermediate' && GO_INTERMEDIATE_CONTENT[title])
+        || (langId === 'go' && level === 'advanced' && GO_ADVANCED_CONTENT[title]);
 
     return {
         id: `${langId}-${level}-${index}`,
@@ -6262,6 +6268,103 @@ export const getCurriculum = (langId) => {
         "C Internals"
     ];
 
+    const rustBeginnerTitles = [
+        "Introduction to Rust",
+        "Rust Installation & Setup",
+        "Rust Program Structure",
+        "Variables & Mutability",
+        "Data Types",
+        "Ownership",
+        "Borrowing",
+        "References",
+        "Operators",
+        "Control Flow",
+        "Loops",
+        "Functions",
+        "Tuples",
+        "Arrays",
+        "Strings"
+    ];
+
+    const rustIntermediateTitles = [
+        "Structs",
+        "Enums",
+        "Pattern Matching",
+        "Methods",
+        "Traits",
+        "Generics",
+        "Error Handling",
+        "Option & Result",
+        "Lifetimes",
+        "Modules & Crates",
+        "Collections",
+        "File Handling",
+        "Testing"
+    ];
+
+    const rustAdvancedTitles = [
+        "Advanced Lifetimes",
+        "Smart Pointers",
+        "Concurrency",
+        "Async / Await",
+        "Unsafe Rust",
+        "Memory Management Internals",
+        "Performance Optimization",
+        "Macros",
+        "Procedural Macros",
+        "FFI (Foreign Function Interface)",
+        "System Programming",
+        "Embedded Rust",
+        "Rust Compiler Internals"
+    ];
+
+    const rubyBeginnerTitles = [
+        "Introduction to Ruby",
+        "Ruby Installation & Setup",
+        "Ruby Program Structure",
+        "Variables",
+        "Data Types",
+        "Operators",
+        "Control Statements",
+        "Loops",
+        "Methods",
+        "Arrays",
+        "Hashes",
+        "Strings",
+        "Symbols"
+    ];
+
+    const rubyIntermediateTitles = [
+        "Object-Oriented Programming",
+        "Classes & Objects",
+        "Modules & Mixins",
+        "Inheritance",
+        "Polymorphism",
+        "Blocks",
+        "Procs & Lambdas",
+        "Exception Handling",
+        "File Handling",
+        "Enumerables",
+        "Regular Expressions",
+        "Gems & Bundler",
+        "Testing (RSpec / Minitest)"
+    ];
+
+    const rubyAdvancedTitles = [
+        "Metaprogramming",
+        "Ruby Internals",
+        "Memory Management",
+        "Garbage Collection",
+        "Concurrency & Threading",
+        "Fibers",
+        "Performance Optimization",
+        "Ruby on Rails Internals",
+        "API Development",
+        "Security in Ruby",
+        "Design Patterns",
+        "Profiling & Debugging"
+    ];
+
     categories.forEach(level => {
         const titlesForLevel = (langId === 'python' && level === 'beginner') ? pythonBeginnerTitles
             : (langId === 'python' && level === 'intermediate') ? pythonIntermediateTitles
@@ -6281,6 +6384,18 @@ export const getCurriculum = (langId) => {
             : (langId === 'c' && level === 'beginner') ? cBeginnerTitles
             : (langId === 'c' && level === 'intermediate') ? cIntermediateTitles
             : (langId === 'c' && level === 'advanced') ? cAdvancedTitles
+            : (langId === 'csharp' && level === 'beginner') ? csharpBeginnerTitles
+            : (langId === 'csharp' && level === 'intermediate') ? csharpIntermediateTitles
+            : (langId === 'csharp' && level === 'advanced') ? csharpAdvancedTitles
+            : (langId === 'go' && level === 'beginner') ? goBeginnerTitles
+            : (langId === 'go' && level === 'intermediate') ? goIntermediateTitles
+            : (langId === 'go' && level === 'advanced') ? goAdvancedTitles
+            : (langId === 'ruby' && level === 'beginner') ? rubyBeginnerTitles
+            : (langId === 'ruby' && level === 'intermediate') ? rubyIntermediateTitles
+            : (langId === 'ruby' && level === 'advanced') ? rubyAdvancedTitles
+            : (langId === 'rust' && level === 'beginner') ? rustBeginnerTitles
+            : (langId === 'rust' && level === 'intermediate') ? rustIntermediateTitles
+            : (langId === 'rust' && level === 'advanced') ? rustAdvancedTitles
             : baseTitles;
         titlesForLevel.forEach((title, i) => {
             curriculum.push(generateUniqueContent(langId, level, i, title));
@@ -6304,6 +6419,955 @@ export const MOCK_PRACTICE_PROBLEMS = [
             java: "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}"
         }
     }
+];
+
+const CSHARP_BEGINNER_CONTENT = {
+    "Introduction to C# & .NET": {
+        content: `<h3>Introduction to C# & .NET</h3><p>C# is a modern, object-oriented language built on the .NET Framework with automatic memory management, type-safety, and cross-platform support.</p>`,
+        videos: [{ title: "C# Basics - Microsoft", url: "https://www.youtube.com/watch?v=GZ9d9x7ZZKY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Write Console.WriteLine for welcome message', template: 'Console._______("Welcome to C#");', solution: 'WriteLine' },
+            { id: 2, type: 'output', prompt: 'What does using System do?', template: '', solution: 'Imports System namespace' },
+            { id: 3, type: 'modify', prompt: 'Add semicolon to end', template: 'Console.WriteLine("Hello")', solution: 'Console.WriteLine("Hello");' },
+            { id: 4, type: 'fix', prompt: 'Fix the Main method', template: 'static main()', solution: 'static void Main()' },
+            { id: 5, type: 'logic', prompt: 'Is C# managed or unmanaged?', template: '', solution: 'Managed (garbage collection)' }
+        ]
+    },
+    "Program Structure": {
+        content: `<h3>Program Structure</h3><p>Understanding namespaces, using statements, and the Main method.</p>`,
+        videos: [{ title: "Program Structure - Brackeys", url: "https://www.youtube.com/watch?v=sHuLb-vV4l4" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create namespace MyNamespace', template: 'namespace _______', solution: 'MyNamespace' },
+            { id: 2, type: 'output', prompt: 'What is the purpose of using System;?', template: '', solution: 'Imports built-in classes' },
+            { id: 3, type: 'modify', prompt: 'Add string[] args parameter', template: 'static void Main()', solution: 'static void Main(string[] args)' },
+            { id: 4, type: 'fix', prompt: 'Fix missing brace', template: 'namespace MyApp {', solution: 'namespace MyApp { }' },
+            { id: 5, type: 'logic', prompt: 'What are namespaces for?', template: '', solution: 'Organizing code into logical groups' }
+        ]
+    },
+    "Data Types": {
+        content: `<h3>C# Data Types</h3><p>Primitive value types and reference types in C#.</p>`,
+        videos: [{ title: "Data Types - Bro Code", url: "https://www.youtube.com/watch?v=xIqNarUAdF8" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare integer variable', template: 'int age = _______;', solution: '25' },
+            { id: 2, type: 'output', prompt: 'Default value of int?', template: '', solution: '0' },
+            { id: 3, type: 'modify', prompt: 'Use double instead of float', template: 'float pi = 3.14f;', solution: 'double pi = 3.14;' },
+            { id: 4, type: 'fix', prompt: 'Fix string value', template: 'string name = Alice;', solution: 'string name = "Alice";' },
+            { id: 5, type: 'logic', prompt: 'Why is string a reference type?', template: '', solution: 'Strings are objects on the heap' }
+        ]
+    },
+    "Variables & Constants": {
+        content: `<h3>Variables & Constants</h3><p>Declaration, initialization, and scope of variables and constants.</p>`,
+        videos: [{ title: "Variables - Traversy Media", url: "https://www.youtube.com/watch?v=wxznTygnRfQ" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare constant MAX_SIZE = 100', template: 'const int MAX_SIZE = _______;', solution: '100' },
+            { id: 2, type: 'output', prompt: 'Can you modify a const after declaration?', template: '', solution: 'No' },
+            { id: 3, type: 'modify', prompt: 'Make variable readonly', template: 'int version = 1;', solution: 'readonly int version = 1;' },
+            { id: 4, type: 'fix', prompt: 'Fix const declaration', template: 'const int x;', solution: 'const int x = 10;' },
+            { id: 5, type: 'logic', prompt: 'Difference between const and readonly?', template: '', solution: 'const is compile-time, readonly is runtime' }
+        ]
+    },
+    "Operators": {
+        content: `<h3>Operators</h3><p>Arithmetic, comparison, and logical operators in C#.</p>`,
+        videos: [{ title: "Operators - Bro Code", url: "https://www.youtube.com/watch?v=K-bYvzGH_2E" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Calculate 7 + 5 * 2', template: 'int result = _______;', solution: '17' },
+            { id: 2, type: 'output', prompt: 'What is 15 % 4?', template: '', solution: '3' },
+            { id: 3, type: 'modify', prompt: 'Use += operator', template: 'x = x + 5;', solution: 'x += 5;' },
+            { id: 4, type: 'fix', prompt: 'Fix equality check', template: 'if (x = 5)', solution: 'if (x == 5)' },
+            { id: 5, type: 'logic', prompt: 'What does % operator do?', template: '', solution: 'Returns remainder of division' }
+        ]
+    },
+    "Control Statements": {
+        content: `<h3>Control Flow Statements</h3><p>If-else and switch statements for conditional execution.</p>`,
+        videos: [{ title: "Control Flow - Code Monkey", url: "https://www.youtube.com/watch?v=5LrDIUGkQUs" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Check if num > 10', template: 'if (num _______ 10) {', solution: '>' },
+            { id: 2, type: 'output', prompt: 'Output of: if (5 > 3) Console.WriteLine("Yes");?', template: '', solution: 'Yes' },
+            { id: 3, type: 'modify', prompt: 'Add else if for teens', template: 'if (age >= 18) { } else { }', solution: 'else if (age >= 13)' },
+            { id: 4, type: 'fix', prompt: 'Is this valid?', template: 'if (x > 5) Console.WriteLine("Yes");', solution: 'Yes, braces optional for single statement' },
+            { id: 5, type: 'logic', prompt: 'What operator checks equality?', template: '', solution: '==' }
+        ]
+    },
+    "Loops": {
+        content: `<h3>Loops</h3><p>For, while, and foreach loops for repetition.</p>`,
+        videos: [{ title: "Loops - Bro Code", url: "https://www.youtube.com/watch?v=R7lSFRPFBC0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'For loop from 0 to 9', template: 'for (int i = 0; i _______ 10; i++)', solution: '<' },
+            { id: 2, type: 'output', prompt: 'How many times: for (i=0; i<3; i++)?', template: '', solution: '3 times' },
+            { id: 3, type: 'modify', prompt: 'Count down from 5 to 0', template: 'for (int i = 0; i < 5; i++)', solution: 'for (int i = 5; i >= 0; i--)' },
+            { id: 4, type: 'fix', prompt: 'Fix infinite loop', template: 'for (int i = 0; i < 10;)', solution: 'for (int i = 0; i < 10; i++)' },
+            { id: 5, type: 'logic', prompt: 'When does while loop stop?', template: '', solution: 'When condition becomes false' }
+        ]
+    },
+    "Methods & Functions": {
+        content: `<h3>Methods</h3><p>Creating and calling methods with parameters and return values.</p>`,
+        videos: [{ title: "Methods - Traversy Media", url: "https://www.youtube.com/watch?v=2ZIw-3F3q5w" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Method that returns 10', template: 'public int _______()', solution: 'GetNumber' },
+            { id: 2, type: 'output', prompt: 'Return value of Multiply(4, 5)?', template: '', solution: '20' },
+            { id: 3, type: 'modify', prompt: 'Add name parameter', template: 'public void Greet() { }', solution: 'public void Greet(string name) { }' },
+            { id: 4, type: 'fix', prompt: 'Fix method syntax', template: 'public void PrintNum int x { }', solution: 'public void PrintNum(int x) { }' },
+            { id: 5, type: 'logic', prompt: 'What keyword stops and returns?', template: '', solution: 'return' }
+        ]
+    },
+    "Arrays": {
+        content: `<h3>Arrays</h3><p>Single and multidimensional arrays for storing collections of data.</p>`,
+        videos: [{ title: "Arrays - Code Monkey", url: "https://www.youtube.com/watch?v=V-TZPe1Wf0o" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare array of 5 integers', template: 'int[] arr = new int[_______];', solution: '5' },
+            { id: 2, type: 'output', prompt: 'Index of first element?', template: '', solution: '0' },
+            { id: 3, type: 'modify', prompt: 'Initialize with values 1,2,3', template: 'int[] arr = new int[3];', solution: 'int[] arr = { 1, 2, 3 };' },
+            { id: 4, type: 'fix', prompt: 'Fix array access', template: 'int x = arr[3];', solution: 'int x = arr[2]; (out of bounds)' },
+            { id: 5, type: 'logic', prompt: 'Get array length?', template: '', solution: 'array.Length' }
+        ]
+    },
+    "Strings": {
+        content: `<h3>Strings</h3><p>String manipulation, concatenation, and interpolation methods.</p>`,
+        videos: [{ title: "Strings - Bro Code", url: "https://www.youtube.com/watch?v=gfkTfcpWqAY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Concatenate "Hello " + "World"', template: 'string result = "Hello " _______ "World";', solution: '+' },
+            { id: 2, type: 'output', prompt: 'Length of "Hello"?', template: '', solution: '5' },
+            { id: 3, type: 'modify', prompt: 'Use interpolation', template: 'string s = "Name: " + name;', solution: 'string s = $"Name: {name}";' },
+            { id: 4, type: 'fix', prompt: 'Fix string', template: 'string text = Hello World;', solution: 'string text = "Hello World";' },
+            { id: 5, type: 'logic', prompt: 'Get character at index?', template: '', solution: 'string[index]' }
+        ]
+    }
+};
+
+const csharpBeginnerTitles = [
+    "Introduction to C# & .NET",
+    "Program Structure",
+    "Data Types",
+    "Variables & Constants",
+    "Operators",
+    "Control Statements",
+    "Loops",
+    "Methods & Functions",
+    "Arrays",
+    "Strings"
+];
+
+const CSHARP_INTERMEDIATE_CONTENT = {
+    "Object-Oriented Programming (OOP)": {
+        content: `<h3>OOP</h3><p>Core principles of object-oriented programming in C#.</p>`,
+        videos: [{ title: "OOP - Traversy", url: "https://www.youtube.com/watch?v=SLnwkKKnZWU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: '4 pillars of OOP', template: '', solution: 'Encapsulation, Inheritance, Polymorphism, Abstraction' },
+            { id: 2, type: 'output', prompt: 'Is C# OOP?', template: '', solution: 'Yes' },
+            { id: 3, type: 'modify', prompt: 'Create class Animal', template: 'public class _______', solution: 'Animal' },
+            { id: 4, type: 'fix', prompt: 'Fix class syntax', template: 'class Dog {', solution: 'Add closing }' },
+            { id: 5, type: 'logic', prompt: 'What is an object?', template: '', solution: 'Instance of a class' }
+        ]
+    },
+    "Classes & Objects": {
+        content: `<h3>Classes & Objects</h3><p>Creating classes and instantiating objects in C#.</p>`,
+        videos: [{ title: "Classes - Code Monkey", url: "https://www.youtube.com/watch?v=sLyWnV87YmU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create Person object', template: 'Person p = new _______();', solution: 'Person' },
+            { id: 2, type: 'output', prompt: 'How to create instance?', template: '', solution: 'Use new keyword' },
+            { id: 3, type: 'modify', prompt: 'Add Name property', template: 'class Person { }', solution: 'public string Name { get; set; }' },
+            { id: 4, type: 'fix', prompt: 'Fix instantiation', template: 'Person p = Person();', solution: 'Person p = new Person();' },
+            { id: 5, type: 'logic', prompt: 'Class vs object?', template: '', solution: 'Class is template, object is instance' }
+        ]
+    },
+    "Constructors & Destructors": {
+        content: `<h3>Constructors & Destructors</h3><p>Initialization and cleanup methods.</p>`,
+        videos: [{ title: "Constructors - Brackeys", url: "https://www.youtube.com/watch?v=LMRMb91z0CY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Constructor for Person', template: 'public _______() { }', solution: 'Person' },
+            { id: 2, type: 'output', prompt: 'When constructor called?', template: '', solution: 'When object created' },
+            { id: 3, type: 'modify', prompt: 'Add string name parameter', template: 'public Person() { }', solution: 'public Person(string name) { }' },
+            { id: 4, type: 'fix', prompt: 'Fix name', template: 'public person() { }', solution: 'public Person() { }' },
+            { id: 5, type: 'logic', prompt: 'Multiple constructors allowed?', template: '', solution: 'Yes, overloading' }
+        ]
+    },
+    "Inheritance": {
+        content: `<h3>Inheritance</h3><p>Code reuse through class hierarchy.</p>`,
+        videos: [{ title: "Inheritance - Code Monkey", url: "https://www.youtube.com/watch?v=hCnLp8SzpWs" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Dog inherits Animal', template: 'public class Dog : _______', solution: 'Animal' },
+            { id: 2, type: 'output', prompt: 'Parent class called?', template: '', solution: 'Base class' },
+            { id: 3, type: 'modify', prompt: 'Override method', template: 'class Dog : Animal { }', solution: 'public override void Speak()' },
+            { id: 4, type: 'fix', prompt: 'Fix inheritance', template: 'class Dog : Animal, Cat { }', solution: 'C# no multi-class inheritance' },
+            { id: 5, type: 'logic', prompt: 'Dog inherits Animal methods?', template: '', solution: 'Yes' }
+        ]
+    },
+    "Polymorphism": {
+        content: `<h3>Polymorphism</h3><p>Method overloading and overriding.</p>`,
+        videos: [{ title: "Polymorphism - Brackeys", url: "https://www.youtube.com/watch?v=TjU1pjfxaI0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Add(double a, double b)', template: 'return _______;', solution: 'a + b' },
+            { id: 2, type: 'output', prompt: 'Overloading definition?', template: '', solution: 'Same name, different params' },
+            { id: 3, type: 'modify', prompt: 'Override virtual', template: 'virtual void Speak()', solution: 'override void Speak()' },
+            { id: 4, type: 'fix', prompt: 'Fix override', template: 'override void speak()', solution: 'override void Speak()' },
+            { id: 5, type: 'logic', prompt: 'Mark overridable?', template: '', solution: 'virtual keyword' }
+        ]
+    },
+    "Abstraction": {
+        content: `<h3>Abstraction</h3><p>Abstract classes and hiding complexity.</p>`,
+        videos: [{ title: "Abstraction - Code Monkey", url: "https://www.youtube.com/watch?v=qxzQGFdVvDA" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Abstract class Shape', template: 'public _______ class Shape', solution: 'abstract' },
+            { id: 2, type: 'output', prompt: 'Create abstract instance?', template: '', solution: 'No' },
+            { id: 3, type: 'modify', prompt: 'Add abstract method', template: 'abstract class Shape { }', solution: 'public abstract void Draw();' },
+            { id: 4, type: 'fix', prompt: 'Fix abstract method', template: 'abstract void Draw() { }', solution: 'No body allowed' },
+            { id: 5, type: 'logic', prompt: 'Derived classes must implement?', template: '', solution: 'Yes' }
+        ]
+    },
+    "Interfaces": {
+        content: `<h3>Interfaces</h3><p>Contracts defining behavior without implementation.</p>`,
+        videos: [{ title: "Interfaces - Traversy", url: "https://www.youtube.com/watch?v=F5-2l-nxJJU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Implement IDrawable', template: 'class Circle : _______', solution: 'IDrawable' },
+            { id: 2, type: 'output', prompt: 'Interface fields allowed?', template: '', solution: 'No' },
+            { id: 3, type: 'modify', prompt: 'Multiple interfaces', template: 'class Car : IMoveable', solution: ', IDrawable' },
+            { id: 4, type: 'fix', prompt: 'Fix interface', template: 'interface IShape { }', solution: 'public interface IShape' },
+            { id: 5, type: 'logic', prompt: 'Class implement multiple?', template: '', solution: 'Yes' }
+        ]
+    },
+    "Exception Handling": {
+        content: `<h3>Exception Handling</h3><p>Try-catch blocks for error management.</p>`,
+        videos: [{ title: "Exceptions - Brackeys", url: "https://www.youtube.com/watch?v=h0ySUO0EQTY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Wrap in try block', template: '_______ { arr[10] = 5; }', solution: 'try' },
+            { id: 2, type: 'output', prompt: 'After try comes?', template: '', solution: 'catch' },
+            { id: 3, type: 'modify', prompt: 'Add finally', template: 'try { } catch { }', solution: 'finally { }' },
+            { id: 4, type: 'fix', prompt: 'Fix catch', template: 'catch(Exception)', solution: 'catch(Exception ex)' },
+            { id: 5, type: 'logic', prompt: 'Finally purpose?', template: '', solution: 'Cleanup code' }
+        ]
+    },
+    "Collections": {
+        content: `<h3>Collections</h3><p>List, Dictionary, HashSet and other collection types.</p>`,
+        videos: [{ title: "Collections - Code Monkey", url: "https://www.youtube.com/watch?v=QW9pL61gp1E" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create List<int>', template: 'List<int> _______ = new();', solution: 'numbers' },
+            { id: 2, type: 'output', prompt: 'Add item to list?', template: '', solution: 'list.Add(item)' },
+            { id: 3, type: 'modify', prompt: 'Use Dictionary', template: 'List<string> items', solution: 'Dictionary<string, int>' },
+            { id: 4, type: 'fix', prompt: 'Fix List', template: 'List<int> = new();', solution: 'List<int> numbers = new();' },
+            { id: 5, type: 'logic', prompt: 'List vs Array?', template: '', solution: 'List dynamic, Array fixed' }
+        ]
+    },
+    "Generics": {
+        content: `<h3>Generics</h3><p>Type-safe collections and methods with generic parameters.</p>`,
+        videos: [{ title: "Generics - Traversy", url: "https://www.youtube.com/watch?v=ZeZHxB_uNQY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Pair<T, U>', template: 'class Pair<T, _______>', solution: 'U' },
+            { id: 2, type: 'output', prompt: '<T> means?', template: '', solution: 'Type parameter' },
+            { id: 3, type: 'modify', prompt: 'Add constraint', template: 'Container<T>', solution: 'where T : class' },
+            { id: 4, type: 'fix', prompt: 'Fix generics', template: 'Swap<T, T>(T a, T b)', solution: 'Swap<T>(T a, T b)' },
+            { id: 5, type: 'logic', prompt: 'Why generics?', template: '', solution: 'Type safety, reuse' }
+        ]
+    },
+    "File Handling": {
+        content: `<h3>File Handling</h3><p>Reading and writing files using System.IO.</p>`,
+        videos: [{ title: "File I/O - Brackeys", url: "https://www.youtube.com/watch?v=qhVV2XPcvL4" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Read all text', template: 'File.ReadAllText("_______")', solution: '"file.txt"' },
+            { id: 2, type: 'output', prompt: 'File class namespace?', template: '', solution: 'System.IO' },
+            { id: 3, type: 'modify', prompt: 'Write multiple lines', template: 'WriteAllText', solution: 'WriteAllLines' },
+            { id: 4, type: 'fix', prompt: 'Fix write', template: 'File.Write()', solution: 'WriteAllText()' },
+            { id: 5, type: 'logic', prompt: 'Read large files?', template: '', solution: 'StreamReader' }
+        ]
+    },
+    "Delegates & Events": {
+        content: `<h3>Delegates & Events</h3><p>Function callbacks and event-driven programming patterns.</p>`,
+        videos: [{ title: "Delegates - Code Monkey", url: "https://www.youtube.com/watch?v=jlQmeyce65Q" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Delegate definition', template: 'delegate _______ MyDel()', solution: 'void' },
+            { id: 2, type: 'output', prompt: 'Delegate is?', template: '', solution: 'Type-safe callback' },
+            { id: 3, type: 'modify', prompt: 'Create event', template: 'delegate void OnClick()', solution: 'event OnClick Clicked' },
+            { id: 4, type: 'fix', prompt: 'Fix delegate', template: 'MyDelegate del = Method', solution: 'Assign if signature matches' },
+            { id: 5, type: 'logic', prompt: 'Trigger event?', template: '', solution: 'Invoke()' }
+        ]
+    },
+    "LINQ": {
+        content: `<h3>LINQ</h3><p>Query data using Language Integrated Query syntax.</p>`,
+        videos: [{ title: "LINQ - Traversy", url: "https://www.youtube.com/watch?v=Vbx5VqPo8gI" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Filter n > 5', template: '.Where(n => n _______ 5)', solution: '>' },
+            { id: 2, type: 'output', prompt: 'LINQ stands for?', template: '', solution: 'Language Integrated Query' },
+            { id: 3, type: 'modify', prompt: 'Double values', template: '.Select(n => n)', solution: '.Select(n => n * 2)' },
+            { id: 4, type: 'fix', prompt: 'Fix query', template: '.where(x => x > 5)', solution: '.Where(x => x > 5)' },
+            { id: 5, type: 'logic', prompt: 'LINQ lazy or eager?', template: '', solution: 'Lazy' }
+        ]
+    }
+};
+
+const csharpIntermediateTitles = [
+    "Object-Oriented Programming (OOP)",
+    "Classes & Objects",
+    "Constructors & Destructors",
+    "Inheritance",
+    "Polymorphism",
+    "Abstraction",
+    "Interfaces",
+    "Exception Handling",
+    "Collections",
+    "Generics",
+    "File Handling",
+    "Delegates & Events",
+    "LINQ"
+];
+
+const CSHARP_ADVANCED_CONTENT = {
+    ".NET Runtime & CLR": {
+        content: `<h3>.NET Runtime & CLR</h3><p>Understanding managed execution and runtime compilation.</p>`,
+        videos: [{ title: ".NET Runtime - Microsoft", url: "https://www.youtube.com/watch?v=mABDtqkOh_4" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'JIT stands for?', template: '', solution: 'Just-In-Time' },
+            { id: 2, type: 'output', prompt: 'When IL compiled?', template: '', solution: 'At runtime' },
+            { id: 3, type: 'modify', prompt: 'AOT compilation', template: '', solution: 'Ahead-Of-Time pre-compilation' },
+            { id: 4, type: 'fix', prompt: 'Fix: IL is machine code', template: '', solution: 'IL is intermediate language' },
+            { id: 5, type: 'logic', prompt: 'What is metadata?', template: '', solution: 'Type information in assembly' }
+        ]
+    },
+    "Memory Management & Garbage Collection": {
+        content: `<h3>Memory Management & GC</h3><p>Managed memory, generational garbage collection, and IDisposable.</p>`,
+        videos: [{ title: "Memory - Brackeys", url: "https://www.youtube.com/watch?v=F5h7-HQXrxU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Force GC', template: 'GC._______();', solution: 'Collect' },
+            { id: 2, type: 'output', prompt: 'GC generations?', template: '', solution: '3 (Gen0, Gen1, Gen2)' },
+            { id: 3, type: 'modify', prompt: 'Implement IDisposable', template: 'class Resource { }', solution: ': IDisposable { }' },
+            { id: 4, type: 'fix', prompt: 'Fix finalizer', template: '~Resource() { }', solution: 'Add Dispose(false)' },
+            { id: 5, type: 'logic', prompt: 'Weak reference?', template: '', solution: 'Won\'t prevent GC' }
+        ]
+    },
+    "Async / Await": {
+        content: `<h3>Async / Await</h3><p>Asynchronous programming with async/await keywords and Task.</p>`,
+        videos: [{ title: "Async/Await - Traversy", url: "https://www.youtube.com/watch?v=5Vz8-JNSalA" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Mark method async', template: 'public _______ Task Method()', solution: 'async' },
+            { id: 2, type: 'output', prompt: 'Await does?', template: '', solution: 'Pauses until Task completes' },
+            { id: 3, type: 'modify', prompt: 'Return value', template: 'async Task Method()', solution: 'async Task<string> Method()' },
+            { id: 4, type: 'fix', prompt: 'Fix async', template: 'void async Method()', solution: 'async Task Method()' },
+            { id: 5, type: 'logic', prompt: 'Task.WhenAll?', template: '', solution: 'Wait all tasks complete' }
+        ]
+    },
+    "Multithreading & Parallel Programming": {
+        content: `<h3>Multithreading & Parallel</h3><p>Concurrent execution with threads and parallel programming.</p>`,
+        videos: [{ title: "Multithreading - Code Monkey", url: "https://www.youtube.com/watch?v=kSQpEEBFH8s" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create thread', template: 'Thread t = new(_______)', solution: 'MethodName' },
+            { id: 2, type: 'output', prompt: 'Start thread?', template: '', solution: 't.Start()' },
+            { id: 3, type: 'modify', prompt: 'Parallel for', template: 'for(int i=0; i<10; i++)', solution: 'Parallel.For(0, 10, i => {})' },
+            { id: 4, type: 'fix', prompt: 'Fix start', template: 't.Run();', solution: 't.Start()' },
+            { id: 5, type: 'logic', prompt: 'Synchronize threads?', template: '', solution: 'lock, Mutex, Monitor' }
+        ]
+    },
+    "Task Parallel Library (TPL)": {
+        content: `<h3>Task Parallel Library</h3><p>Modern async patterns with Task and Parallel classes.</p>`,
+        videos: [{ title: "TPL - Brackeys", url: "https://www.youtube.com/watch?v=O2AYJMYRKrQ" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create Task', template: 'Task.Run(() => _______)', solution: 'Console.WriteLine()' },
+            { id: 2, type: 'output', prompt: 'Task.Run does?', template: '', solution: 'Creates and starts task' },
+            { id: 3, type: 'modify', prompt: 'Handle exceptions', template: 'await Task.Run()', solution: 'try { } catch { }' },
+            { id: 4, type: 'fix', prompt: 'Fix Task', template: 'Task t = Task.Run;', solution: 'Task.Run(() => {})' },
+            { id: 5, type: 'logic', prompt: 'AggregateException?', template: '', solution: 'Multiple task exceptions' }
+        ]
+    },
+    "Reflection": {
+        content: `<h3>Reflection</h3><p>Runtime type inspection and dynamic invocation.</p>`,
+        videos: [{ title: "Reflection - Code Monkey", url: "https://www.youtube.com/watch?v=kVDT8qW0rSc" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Get type', template: 'Type t = obj._______();', solution: 'GetType' },
+            { id: 2, type: 'output', prompt: 'Get all methods?', template: '', solution: 'type.GetMethods()' },
+            { id: 3, type: 'modify', prompt: 'Invoke method', template: 'GetMethod("Name")', solution: 'm.Invoke(instance, null)' },
+            { id: 4, type: 'fix', prompt: 'Fix GetType', template: 'Type.GetType()', solution: 'Type.GetType("FullName")' },
+            { id: 5, type: 'logic', prompt: 'CreateInstance?', template: '', solution: 'Activator.CreateInstance' }
+        ]
+    },
+    "Dependency Injection": {
+        content: `<h3>Dependency Injection</h3><p>Loose coupling with DI container and service registration.</p>`,
+        videos: [{ title: "DI - Traversy", url: "https://www.youtube.com/watch?v=ND0eRxMJBKs" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Register Singleton', template: 'services.AddSingleton<I_______>', solution: 'Service, Service' },
+            { id: 2, type: 'output', prompt: 'Singleton vs Transient?', template: '', solution: 'One vs new each time' },
+            { id: 3, type: 'modify', prompt: 'Factory function', template: 'AddSingleton(new Service())', solution: 'AddSingleton(sp => new Service())' },
+            { id: 4, type: 'fix', prompt: 'Fix GetService', template: 'GetService(IService)', solution: 'GetRequiredService<IService>()' },
+            { id: 5, type: 'logic', prompt: 'Scoped lifetime?', template: '', solution: 'Per-request instance' }
+        ]
+    },
+    "Design Patterns": {
+        content: `<h3>Design Patterns</h3><p>Proven solutions: Singleton, Factory, Observer, Strategy and more.</p>`,
+        videos: [{ title: "Design Patterns - Code Monkey", url: "https://www.youtube.com/watch?v=WDfVsDmy1ks" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Singleton pattern', template: 'sealed class Singleton { static _______', solution: 'Instance' },
+            { id: 2, type: 'output', prompt: 'Factory pattern?', template: '', solution: 'Creates objects generically' },
+            { id: 3, type: 'modify', prompt: 'Observer pattern', template: 'List<IObserver>', solution: 'foreach o.Update()' },
+            { id: 4, type: 'fix', prompt: 'Fix Singleton', template: 'instance', solution: 'Instance (property)' },
+            { id: 5, type: 'logic', prompt: 'Strategy pattern?', template: '', solution: 'Encapsulate algorithms' }
+        ]
+    },
+    "Performance Optimization": {
+        content: `<h3>Performance Optimization</h3><p>Writing efficient code: avoid boxing, use StringBuilder, etc.</p>`,
+        videos: [{ title: "Performance - Brackeys", url: "https://www.youtube.com/watch?v=vFj4qhBUW-Q" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Measure time', template: 'Stopwatch.StartNew()', solution: 'sw.Stop(); sw.ElapsedMilliseconds' },
+            { id: 2, type: 'output', prompt: 'Boxing?', template: '', solution: 'Value to object conversion' },
+            { id: 3, type: 'modify', prompt: 'Use StringBuilder', template: 'string result = ""; result += item;', solution: 'var sb = new StringBuilder(); sb.Append()' },
+            { id: 4, type: 'fix', prompt: 'Fix LINQ', template: '.Where().Where()', solution: '.Where(x => condition1 && condition2)' },
+            { id: 5, type: 'logic', prompt: 'Why avoid boxing?', template: '', solution: 'Performance overhead' }
+        ]
+    },
+    "Security in C#": {
+        content: `<h3>Security</h3><p>Secure applications: hashing, validation, SQL injection prevention.</p>`,
+        videos: [{ title: "Security - Microsoft", url: "https://www.youtube.com/watch?v=qT3YxZ7YDCY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Hash password', template: 'SHA256.Create().ComputeHash()', solution: 'Correct pattern' },
+            { id: 2, type: 'output', prompt: 'Never store?', template: '', solution: 'Plaintext passwords' },
+            { id: 3, type: 'modify', prompt: 'Validate input', template: '', solution: 'Check null, empty, type' },
+            { id: 4, type: 'fix', prompt: 'SQL injection', template: '"WHERE id = " + userId', solution: 'Parameterized queries' },
+            { id: 5, type: 'logic', prompt: 'Claims-based identity?', template: '', solution: 'Claims set for identity' }
+        ]
+    },
+    "Unsafe Code & Pointers": {
+        content: `<h3>Unsafe Code & Pointers</h3><p>Direct memory access with pointers and unsafe blocks.</p>`,
+        videos: [{ title: "Unsafe Code - Code Monkey", url: "https://www.youtube.com/watch?v=hVMWZTsJJ1g" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Mark unsafe', template: '_______ { int* ptr; }', solution: 'unsafe' },
+            { id: 2, type: 'output', prompt: '& operator?', template: '', solution: 'Address-of' },
+            { id: 3, type: 'modify', prompt: 'Dereference', template: 'int* ptr = &value;', solution: 'int x = *ptr;' },
+            { id: 4, type: 'fix', prompt: 'Fix pointer', template: 'int * ptr;', solution: 'int* ptr;' },
+            { id: 5, type: 'logic', prompt: 'Why avoid?', template: '', solution: 'Breaks type safety' }
+        ]
+    },
+    "Interoperability (PInvoke)": {
+        content: `<h3>Interoperability</h3><p>Call native code using P/Invoke and marshaling.</p>`,
+        videos: [{ title: "P/Invoke - Brackeys", url: "https://www.youtube.com/watch?v=L5s76NWLVTU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Import native function', template: '[DllImport("kernel32.dll")] extern static _______ GetMetrics(int);', solution: 'int' },
+            { id: 2, type: 'output', prompt: 'P/Invoke?', template: '', solution: 'Platform Invoke for native calls' },
+            { id: 3, type: 'modify', prompt: 'Marshal string', template: 'string s', solution: '[MarshalAs(UnmanagedType.LPStr)] string s' },
+            { id: 4, type: 'fix', prompt: 'Fix DLL', template: '[DllImport("kernel32")]', solution: '[DllImport("kernel32.dll")]' },
+            { id: 5, type: 'logic', prompt: 'Marshaling?', template: '', solution: 'Convert managed to unmanaged' }
+        ]
+    },
+    ".NET Internals": {
+        content: `<h3>.NET Internals</h3><p>Understanding .NET architecture, IL, and assemblies.</p>`,
+        videos: [{ title: ".NET Internals - Microsoft", url: "https://www.youtube.com/watch?v=D3WP2wU3xq0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'IL stands for?', template: '', solution: 'Intermediate Language' },
+            { id: 2, type: 'output', prompt: 'IL compiled by?', template: '', solution: 'JIT compiler at runtime' },
+            { id: 3, type: 'modify', prompt: 'Examine assembly', template: 'Assembly.GetExecutingAssembly()', solution: '.GetName()' },
+            { id: 4, type: 'fix', prompt: 'Fix GetTypes', template: 'GetType()', solution: 'GetTypes()' },
+            { id: 5, type: 'logic', prompt: 'Contains IL & metadata?', template: '', solution: 'Assembly' }
+        ]
+    }
+};
+
+const csharpAdvancedTitles = [
+    ".NET Runtime & CLR",
+    "Memory Management & Garbage Collection",
+    "Async / Await",
+    "Multithreading & Parallel Programming",
+    "Task Parallel Library (TPL)",
+    "Reflection",
+    "Dependency Injection",
+    "Design Patterns",
+    "Performance Optimization",
+    "Security in C#",
+    "Unsafe Code & Pointers",
+    "Interoperability (PInvoke)",
+    ".NET Internals"
+];
+
+
+const GO_BEGINNER_CONTENT = {
+    "Introduction to Go": {
+        content: `<h3>Introduction to Go</h3><p>Go (Golang) is a statically typed, compiled language designed by Google for simplicity, efficiency, and concurrent programming.</p>`,
+        videos: [{ title: "Go Tutorial - Derek Banas", url: "https://www.youtube.com/watch?v=CF9S4QZuV30" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Print "Hello Go"', template: 'package main\\nimport "fmt"\\nfunc main() { fmt.Println(_______) }', solution: '"Hello Go"' },
+            { id: 2, type: 'output', prompt: 'Who created Go?', template: '', solution: 'Google' },
+            { id: 3, type: 'modify', prompt: 'Use Printf instead', template: 'fmt.Println("hello")', solution: 'fmt.Printf("hello\\n")' },
+            { id: 4, type: 'fix', prompt: 'Fix syntax error', template: 'func main(', solution: 'func main() { }' },
+            { id: 5, type: 'logic', prompt: 'Is Go compiled or interpreted?', template: '', solution: 'Compiled' }
+        ]
+    },
+    "Go Environment Setup": {
+        content: `<h3>Environment Setup</h3><p>Setting up Go development environment with GOROOT, GOPATH, and workspace.</p>`,
+        videos: [{ title: "Go Setup - Traversy Media", url: "https://www.youtube.com/watch?v=jtJ0kVhHc8k" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Go installed? Check version', template: 'go _______', solution: 'version' },
+            { id: 2, type: 'output', prompt: 'What is GOPATH?', template: '', solution: 'Home directory for Go packages' },
+            { id: 3, type: 'modify', prompt: 'Create new module', template: '', solution: 'go mod init module_name' },
+            { id: 4, type: 'fix', prompt: 'Fix workspace setup', template: '', solution: 'Set GOPATH environment variable' },
+            { id: 5, type: 'logic', prompt: 'What is go.mod?', template: '', solution: 'Module dependency file' }
+        ]
+    },
+    "Go Program Structure": {
+        content: `<h3>Program Structure</h3><p>Understanding packages, imports, and main function in Go.</p>`,
+        videos: [{ title: "Go Basics - Code Monkey", url: "https://www.youtube.com/watch?v=YXy0TyPLr_s" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Package declaration', template: 'package _______', solution: 'main' },
+            { id: 2, type: 'output', prompt: 'Entry point function?', template: '', solution: 'func main()' },
+            { id: 3, type: 'modify', prompt: 'Import fmt package', template: 'import (', solution: '"fmt"' },
+            { id: 4, type: 'fix', prompt: 'Fix import', template: 'import fmt', solution: 'import "fmt"' },
+            { id: 5, type: 'logic', prompt: 'Can main exist in non-main package?', template: '', solution: 'No' }
+        ]
+    },
+    "Variables": {
+        content: `<h3>Variables</h3><p>Declaring and using variables with type inference in Go.</p>`,
+        videos: [{ title: "Go Variables - Bro Code", url: "https://www.youtube.com/watch?v=pY8X9ZqKP5M" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare string variable', template: 'var name _______ = "John"', solution: 'string' },
+            { id: 2, type: 'output', prompt: 'Default value of int?', template: '', solution: '0' },
+            { id: 3, type: 'modify', prompt: 'Use short declaration', template: 'var x int = 10', solution: 'x := 10' },
+            { id: 4, type: 'fix', prompt: 'Fix declaration', template: 'x := "hello" int', solution: 'x := "hello"' },
+            { id: 5, type: 'logic', prompt: 'What does := do?', template: '', solution: 'Declares and infers type' }
+        ]
+    },
+    "Constants": {
+        content: `<h3>Constants</h3><p>Declaring immutable constant values in Go.</p>`,
+        videos: [{ title: "Go Constants - Traversy", url: "https://www.youtube.com/watch?v=1eaL7BuF-5Y" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare constant', template: 'const PI = _______', solution: '3.14' },
+            { id: 2, type: 'output', prompt: 'Can constants change?', template: '', solution: 'No' },
+            { id: 3, type: 'modify', prompt: 'Constant with type', template: 'const MAX = 100', solution: 'const MAX int = 100' },
+            { id: 4, type: 'fix', prompt: 'Fix const error', template: 'const x = y', solution: 'y must be constant' },
+            { id: 5, type: 'logic', prompt: 'Type inference in const?', template: '', solution: 'Yes' }
+        ]
+    },
+    "Data Types": {
+        content: `<h3>Data Types</h3><p>Basic data types: int, float, bool, string in Go.</p>`,
+        videos: [{ title: "Go Data Types - Code Monkey", url: "https://www.youtube.com/watch?v=t3VZjvC5p-0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Float64 variable', template: 'var pi _______ = 3.14', solution: 'float64' },
+            { id: 2, type: 'output', prompt: 'Difference int vs int64?', template: '', solution: 'Size: 32-bit vs 64-bit' },
+            { id: 3, type: 'modify', prompt: 'Use uint instead', template: 'var count int = 5', solution: 'var count uint = 5' },
+            { id: 4, type: 'fix', prompt: 'Fix type', template: 'var x = "123"; x + 1', solution: 'Type conversion needed' },
+            { id: 5, type: 'logic', prompt: 'Zero value of bool?', template: '', solution: 'false' }
+        ]
+    },
+    "Operators": {
+        content: `<h3>Operators</h3><p>Arithmetic, comparison, and logical operators in Go.</p>`,
+        videos: [{ title: "Go Operators - Bro Code", url: "https://www.youtube.com/watch?v=gNwTu_VqM7g" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Calculate 10 + 5 * 2', template: 'result := _______', solution: '20' },
+            { id: 2, type: 'output', prompt: 'What is 15 % 4?', template: '', solution: '3' },
+            { id: 3, type: 'modify', prompt: 'Use += operator', template: 'x = x + 5', solution: 'x += 5' },
+            { id: 4, type: 'fix', prompt: 'Fix comparison', template: 'if x = 5', solution: 'if x == 5' },
+            { id: 5, type: 'logic', prompt: 'What does && do?', template: '', solution: 'Logical AND' }
+        ]
+    },
+    "Control Statements": {
+        content: `<h3>Control Statements</h3><p>If, else, and else if statements in Go.</p>`,
+        videos: [{ title: "Go Control Flow - Traversy", url: "https://www.youtube.com/watch?v=9VcMfJ6xNeQ" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'If age > 18', template: 'if age _______ 18 {', solution: '>' },
+            { id: 2, type: 'output', prompt: 'Output: if 5 > 3?', template: '', solution: 'Block executes' },
+            { id: 3, type: 'modify', prompt: 'Add else clause', template: 'if x > 5 { }', solution: 'else { }' },
+            { id: 4, type: 'fix', prompt: 'Fix syntax', template: 'if x > 5 { } else if', solution: 'else if y < 10' },
+            { id: 5, type: 'logic', prompt: 'No switch in Go?', template: '', solution: 'Go has switch' }
+        ]
+    },
+    "Loops": {
+        content: `<h3>Loops</h3><p>For loops (only loop type in Go) with various forms.</p>`,
+        videos: [{ title: "Go Loops - Code Monkey", url: "https://www.youtube.com/watch?v=OhxL_aIqWuo" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'For loop 0 to 9', template: 'for i := 0; i _______ 10; i++ {', solution: '<' },
+            { id: 2, type: 'output', prompt: 'Times loop runs?', template: 'for i := 0; i < 3; i++', solution: '3' },
+            { id: 3, type: 'modify', prompt: 'While loop', template: 'for i < 10 {', solution: 'Correct - for is while' },
+            { id: 4, type: 'fix', prompt: 'Infinite loop?', template: 'for {', solution: 'Correct syntax' },
+            { id: 5, type: 'logic', prompt: 'Does Go have while?', template: '', solution: 'No, use for instead' }
+        ]
+    },
+    "Functions": {
+        content: `<h3>Functions</h3><p>Declaring and calling functions in Go.</p>`,
+        videos: [{ title: "Go Functions - Traversy", url: "https://www.youtube.com/watch?v=Hf1d4u6Y6RM" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Function that returns 10', template: 'func GetNum() _______ { return 10 }', solution: 'int' },
+            { id: 2, type: 'output', prompt: 'Return 20?', template: 'func Add(a, b int)', solution: 'return a + b' },
+            { id: 3, type: 'modify', prompt: 'Add parameter type', template: 'func Greet(name) { }', solution: 'func Greet(name string) { }' },
+            { id: 4, type: 'fix', prompt: 'Fix function', template: 'function Add(a, b int)', solution: 'func Add(a, b int)' },
+            { id: 5, type: 'logic', prompt: 'Named return values?', template: '', solution: 'Yes, Go supports it' }
+        ]
+    },
+    "Multiple Return Values": {
+        content: `<h3>Multiple Return Values</h3><p>Functions returning multiple values in Go.</p>`,
+        videos: [{ title: "Go Multiple Returns - Code Monkey", url: "https://www.youtube.com/watch?v=LrJq4LZlPZc" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Return 2 values', template: 'func GetData() (int, _______) {', solution: 'string' },
+            { id: 2, type: 'output', prompt: 'Receive 2 returns?', template: '', solution: 'x, y := GetData()' },
+            { id: 3, type: 'modify', prompt: 'Named returns', template: 'func Divide(a, b int)', solution: '(result int, err error)' },
+            { id: 4, type: 'fix', prompt: 'Fix return', template: 'return a, b, c', solution: 'Only 2 declared' },
+            { id: 5, type: 'logic', prompt: 'Common pattern?', template: '', solution: '(result, error)' }
+        ]
+    },
+    "Packages & Imports": {
+        content: `<h3>Packages & Imports</h3><p>Organizing code with packages and importing functionality.</p>`,
+        videos: [{ title: "Go Packages - Traversy", url: "https://www.youtube.com/watch?v=HRMjOgCi43w" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Import fmt package', template: 'import "_______"', solution: '"fmt"' },
+            { id: 2, type: 'output', prompt: 'What defines public?', template: '', solution: 'Uppercase first letter' },
+            { id: 3, type: 'modify', prompt: 'Multiple imports', template: 'import "fmt"\\nimport "math"', solution: 'import (\\n"fmt"\\n"math"\\n)' },
+            { id: 4, type: 'fix', prompt: 'Fix alias', template: 'import fmt "fmt"', solution: 'fmt.Println() works' },
+            { id: 5, type: 'logic', prompt: 'Package main purpose?', template: '', solution: 'Entry point for executable' }
+        ]
+    },
+    "Arrays": {
+        content: `<h3>Arrays</h3><p>Fixed-length arrays in Go.</p>`,
+        videos: [{ title: "Go Arrays - Code Monkey", url: "https://www.youtube.com/watch?v=bJ4T3yVd_Bc" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare array of 5 ints', template: 'var arr [_______]int', solution: '5' },
+            { id: 2, type: 'output', prompt: 'First element index?', template: '', solution: '0' },
+            { id: 3, type: 'modify', prompt: 'Initialize with values', template: 'arr := [5]int{}', solution: 'arr := [5]int{1,2,3,4,5}' },
+            { id: 4, type: 'fix', prompt: 'Fix array', template: 'arr[10] = 5 (len=5)', solution: 'Index out of bounds' },
+            { id: 5, type: 'logic', prompt: 'Array size fixed?', template: '', solution: 'Yes' }
+        ]
+    },
+    "Slices": {
+        content: `<h3>Slices</h3><p>Dynamic-length slices in Go (more flexible than arrays).</p>`,
+        videos: [{ title: "Go Slices - Traversy", url: "https://www.youtube.com/watch?v=ht8Zd91z0sE" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare slice', template: 'var nums _______int', solution: '[]' },
+            { id: 2, type: 'output', prompt: 'Append to slice?', template: '', solution: 'nums = append(nums, value)' },
+            { id: 3, type: 'modify', prompt: 'Make slice with capacity', template: 'nums := []int{}', solution: 'nums := make([]int, 0, 10)' },
+            { id: 4, type: 'fix', prompt: 'Fix slice creation', template: 'nums := make([]int)', solution: 'Add len or len,cap' },
+            { id: 5, type: 'logic', prompt: 'Slice vs array?', template: '', solution: 'Slice is dynamic, flexible' }
+        ]
+    },
+    "Strings": {
+        content: `<h3>Strings</h3><p>String manipulation and operations in Go.</p>`,
+        videos: [{ title: "Go Strings - Bro Code", url: "https://www.youtube.com/watch?v=zJVoAz0LhiA" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Concatenate "Hello" + "World"', template: 'result := "Hello" _______ "World"', solution: '+' },
+            { id: 2, type: 'output', prompt: 'Length of "Go"?', template: '', solution: '2' },
+            { id: 3, type: 'modify', prompt: 'Convert to uppercase', template: 'name := "go"', solution: 'strings.ToUpper(name)' },
+            { id: 4, type: 'fix', prompt: 'Fix string', template: 'name = "john; age = 25', solution: 'Missing closing quote' },
+            { id: 5, type: 'logic', prompt: 'Rune type for?', template: '', solution: 'Single character' }
+        ]
+    }
+};
+
+const goBeginnerTitles = [
+    "Introduction to Go",
+    "Go Environment Setup",
+    "Go Program Structure",
+    "Variables",
+    "Constants",
+    "Data Types",
+    "Operators",
+    "Control Statements",
+    "Loops",
+    "Functions",
+    "Multiple Return Values",
+    "Packages & Imports",
+    "Arrays",
+    "Slices",
+    "Strings"
+];
+
+const GO_INTERMEDIATE_CONTENT = {
+    "Structs": {
+        content: `<h3>Structs</h3><p>Defining composite data types with fields in Go.</p>`,
+        videos: [{ title: "Go Structs - Traversy", url: "https://www.youtube.com/watch?v=GHzj5ftnI-8" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Struct Person with Name', template: 'type Person struct { Name _______ }', solution: 'string' },
+            { id: 2, type: 'output', prompt: 'Create Person instance?', template: '', solution: 'p := Person{Name: "John"}' },
+            { id: 3, type: 'modify', prompt: 'Add Age field', template: 'type Person struct { Name string }', solution: 'Age int' },
+            { id: 4, type: 'fix', prompt: 'Fix struct', template: 'struct Person { }', solution: 'type Person struct { }' },
+            { id: 5, type: 'logic', prompt: 'Exported fields?', template: '', solution: 'Capitalize first letter' }
+        ]
+    },
+    "Methods": {
+        content: `<h3>Methods</h3><p>Methods on types and receivers in Go.</p>`,
+        videos: [{ title: "Go Methods - Code Monkey", url: "https://www.youtube.com/watch?v=pOKJRpwQF2Y" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Method on Person', template: 'func (p Person) GetName() _______', solution: 'string' },
+            { id: 2, type: 'output', prompt: 'Call method?', template: '', solution: 'p.GetName()' },
+            { id: 3, type: 'modify', prompt: 'Pointer receiver', template: 'func (p Person)', solution: 'func (p *Person)' },
+            { id: 4, type: 'fix', prompt: 'Fix method', template: 'func Person.GetName()', solution: 'func (p Person) GetName()' },
+            { id: 5, type: 'logic', prompt: 'Receiver types?', template: '', solution: 'Value or pointer' }
+        ]
+    },
+    "Interfaces": {
+        content: `<h3>Interfaces</h3><p>Defining contracts with interfaces in Go.</p>`,
+        videos: [{ title: "Go Interfaces - Traversy", url: "https://www.youtube.com/watch?v=qJXOtEUohqU" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Interface Reader', template: 'type Reader interface { Read() (_______) }', solution: '[]byte' },
+            { id: 2, type: 'output', prompt: 'Implement interface?', template: '', solution: 'Provide all methods' },
+            { id: 3, type: 'modify', prompt: 'Multiple methods', template: 'type Reader interface { Read() }', solution: 'Write(), Close()' },
+            { id: 4, type: 'fix', prompt: 'Fix interface', template: 'interface Reader { }', solution: 'type Reader interface { }' },
+            { id: 5, type: 'logic', prompt: 'Implicit implementation?', template: '', solution: 'Yes, no explicit keyword' }
+        ]
+    },
+    "Pointers": {
+        content: `<h3>Pointers</h3><p>Working with pointers and memory addresses in Go.</p>`,
+        videos: [{ title: "Go Pointers - Code Monkey", url: "https://www.youtube.com/watch?v=sTFJtxpnUik" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare int pointer', template: 'var ptr _______int', solution: '*' },
+            { id: 2, type: 'output', prompt: 'Address of variable?', template: '', solution: '&variable' },
+            { id: 3, type: 'modify', prompt: 'Dereference pointer', template: 'value := *ptr', solution: 'Correct' },
+            { id: 4, type: 'fix', prompt: 'Fix pointer', template: 'ptr = &x; *ptr = 10', solution: 'Correct' },
+            { id: 5, type: 'logic', prompt: 'Nil pointer value?', template: '', solution: 'nil' }
+        ]
+    },
+    "Maps": {
+        content: `<h3>Maps</h3><p>Key-value pairs with maps in Go.</p>`,
+        videos: [{ title: "Go Maps - Traversy", url: "https://www.youtube.com/watch?v=drQnea_lXAc" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare map', template: 'var m map[string]_______', solution: 'int' },
+            { id: 2, type: 'output', prompt: 'Make map?', template: '', solution: 'm := make(map[string]int)' },
+            { id: 3, type: 'modify', prompt: 'Check if key exists', template: 'value := m["key"]', solution: 'v, ok := m["key"]' },
+            { id: 4, type: 'fix', prompt: 'Fix map usage', template: 'm := map[key]value{}', solution: 'm := map[string]int{}' },
+            { id: 5, type: 'logic', prompt: 'Delete from map?', template: '', solution: 'delete(m, key)' }
+        ]
+    },
+    "Error Handling": {
+        content: `<h3>Error Handling</h3><p>Handling errors using error type in Go.</p>`,
+        videos: [{ title: "Go Error Handling - Code Monkey", url: "https://www.youtube.com/watch?v=4KfAS3zrvX8" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Return error', template: 'return 0, _______', solution: 'err' },
+            { id: 2, type: 'output', prompt: 'Check error?', template: '', solution: 'if err != nil' },
+            { id: 3, type: 'modify', prompt: 'Create custom error', template: 'errors.New("")', solution: 'errors.New("message")' },
+            { id: 4, type: 'fix', prompt: 'Fix error handling', template: 'if error != nil { }', solution: 'if err != nil' },
+            { id: 5, type: 'logic', prompt: 'Error interface?', template: '', solution: 'Has Error() string' }
+        ]
+    },
+    "Defer, Panic & Recover": {
+        content: `<h3>Defer, Panic & Recover</h3><p>Control flow with defer, panic, and recover.</p>`,
+        videos: [{ title: "Go Defer & Panic - Traversy", url: "https://www.youtube.com/watch?v=jNr9vv2KKOY" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Defer statement', template: 'defer _______', solution: 'functionCall()' },
+            { id: 2, type: 'output', prompt: 'When defer executes?', template: '', solution: 'Before function returns' },
+            { id: 3, type: 'modify', prompt: 'Panic error', template: '', solution: 'panic("error message")' },
+            { id: 4, type: 'fix', prompt: 'Fix recover', template: 'recover() in main', solution: 'recover() in deferred function' },
+            { id: 5, type: 'logic', prompt: 'Order of defers?', template: '', solution: 'LIFO (Last In First Out)' }
+        ]
+    },
+    "File Handling": {
+        content: `<h3>File Handling</h3><p>Reading and writing files in Go.</p>`,
+        videos: [{ title: "Go File I/O - Code Monkey", url: "https://www.youtube.com/watch?v=aT8P90fKhWI" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Read file', template: 'ioutil.ReadFile("_______")', solution: '"filename.txt"' },
+            { id: 2, type: 'output', prompt: 'Write to file?', template: '', solution: 'ioutil.WriteFile()' },
+            { id: 3, type: 'modify', prompt: 'Use os.Open', template: 'ReadFile()', solution: 'f, err := os.Open()' },
+            { id: 4, type: 'fix', prompt: 'Fix file ops', template: 'ReadFile("file")', solution: 'Check error' },
+            { id: 5, type: 'logic', prompt: 'Close file?', template: '', solution: 'defer file.Close()' }
+        ]
+    },
+    "Modules (Go Modules)": {
+        content: `<h3>Modules</h3><p>Managing dependencies with Go modules (go.mod).</p>`,
+        videos: [{ title: "Go Modules - Traversy", url: "https://www.youtube.com/watch?v=H2aV9iZNW78" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Init module', template: 'go mod _______', solution: 'init' },
+            { id: 2, type: 'output', prompt: 'go.mod file?', template: '', solution: 'Module declaration & deps' },
+            { id: 3, type: 'modify', prompt: 'Add dependency', template: 'go get package', solution: 'Correct' },
+            { id: 4, type: 'fix', prompt: 'Fix module path', template: 'module github/user/repo', solution: 'module github.com/user/repo' },
+            { id: 5, type: 'logic', prompt: 'go.sum file?', template: '', solution: 'Integrity hashes' }
+        ]
+    },
+    "Testing": {
+        content: `<h3>Testing</h3><p>Writing tests using testing package in Go.</p>`,
+        videos: [{ title: "Go Testing - Code Monkey", url: "https://www.youtube.com/watch?v=qqakBaO_8-g" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Test function', template: 'func Test_______', solution: 'FunctionName(t *testing.T)' },
+            { id: 2, type: 'output', prompt: 'Run tests?', template: '', solution: 'go test' },
+            { id: 3, type: 'modify', prompt: 'Fail test', template: '', solution: 't.Fail() or t.Error()' },
+            { id: 4, type: 'fix', prompt: 'Fix test name', template: 'func TestAdd()', solution: 'Correct' },
+            { id: 5, type: 'logic', prompt: 'Test file suffix?', template: '', solution: '_test.go' }
+        ]
+    },
+    "JSON Handling": {
+        content: `<h3>JSON Handling</h3><p>Marshaling and unmarshaling JSON in Go.</p>`,
+        videos: [{ title: "Go JSON - Traversy", url: "https://www.youtube.com/watch?v=WfRj9gzZVz0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Marshal to JSON', template: 'json.Marshal_______', solution: '(data)' },
+            { id: 2, type: 'output', prompt: 'Unmarshal JSON?', template: '', solution: 'json.Unmarshal(data, &v)' },
+            { id: 3, type: 'modify', prompt: 'Add struct tags', template: 'type Person struct { Name }', solution: 'Name string `json:"name"`' },
+            { id: 4, type: 'fix', prompt: 'Fix JSON tag', template: '`json=name`', solution: '`json:"name"`' },
+            { id: 5, type: 'logic', prompt: 'Omit empty?', template: '', solution: '`json:"name,omitempty"`' }
+        ]
+    },
+    "Standard Library Usage": {
+        content: `<h3>Standard Library</h3><p>Using Go's extensive standard library packages.</p>`,
+        videos: [{ title: "Go Stdlib - Code Monkey", url: "https://www.youtube.com/watch?v=pKbkLs8Qw0s" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'String functions import', template: 'import "_______"', solution: '"strings"' },
+            { id: 2, type: 'output', prompt: 'Math package?', template: '', solution: 'import "math"' },
+            { id: 3, type: 'modify', prompt: 'Time package', template: '', solution: 'import "time"' },
+            { id: 4, type: 'fix', prompt: 'Fix import', template: 'import math', solution: 'import "math"' },
+            { id: 5, type: 'logic', prompt: 'Rand package location?', template: '', solution: 'math/rand' }
+        ]
+    }
+};
+
+const goIntermediateTitles = [
+    "Structs",
+    "Methods",
+    "Interfaces",
+    "Pointers",
+    "Maps",
+    "Error Handling",
+    "Defer, Panic & Recover",
+    "File Handling",
+    "Modules (Go Modules)",
+    "Testing",
+    "JSON Handling",
+    "Standard Library Usage"
+];
+
+const GO_ADVANCED_CONTENT = {
+    "Goroutines": {
+        content: `<h3>Goroutines</h3><p>Lightweight threads managed by Go runtime for concurrent execution.</p>`,
+        videos: [{ title: "Go Goroutines - Traversy", url: "https://www.youtube.com/watch?v=WKoI6fg4P7I" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Launch goroutine', template: 'go _______', solution: 'FunctionName()' },
+            { id: 2, type: 'output', prompt: 'Goroutine lightweight?', template: '', solution: 'Yes, thousands can run' },
+            { id: 3, type: 'modify', prompt: 'Wait for goroutines', template: '', solution: 'sync.WaitGroup' },
+            { id: 4, type: 'fix', prompt: 'Fix goroutine', template: 'goroutine func() { }', solution: 'go func() { }()' },
+            { id: 5, type: 'logic', prompt: 'Goroutine vs thread?', template: '', solution: 'Goroutines lighter, managed by runtime' }
+        ]
+    },
+    "Channels": {
+        content: `<h3>Channels</h3><p>Communication between goroutines using channels.</p>`,
+        videos: [{ title: "Go Channels - Code Monkey", url: "https://www.youtube.com/watch?v=sLFQpKhetEA" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare channel', template: 'var ch _____ int', solution: 'chan' },
+            { id: 2, type: 'output', prompt: 'Make channel?', template: '', solution: 'ch := make(chan int)' },
+            { id: 3, type: 'modify', prompt: 'Buffered channel', template: 'make(chan int)', solution: 'make(chan int, 5)' },
+            { id: 4, type: 'fix', prompt: 'Fix channel send', template: 'ch <- value', solution: 'Correct' },
+            { id: 5, type: 'logic', prompt: 'Receive from channel?', template: '', solution: 'value := <-ch' }
+        ]
+    },
+    "Concurrency Patterns": {
+        content: `<h3>Concurrency Patterns</h3><p>Common patterns like worker pools, pipelines.</p>`,
+        videos: [{ title: "Go Patterns - Traversy", url: "https://www.youtube.com/watch?v=_DdJVfASdfM" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Worker pool pattern', template: '', solution: 'Multiple workers reading channel' },
+            { id: 2, type: 'output', prompt: 'Pipeline pattern?', template: '', solution: 'Channel between stages' },
+            { id: 3, type: 'modify', prompt: 'Fan-out/Fan-in', template: '', solution: 'Distribute and collect results' },
+            { id: 4, type: 'fix', prompt: 'Fix pattern', template: '', solution: 'Use goroutines + channels' },
+            { id: 5, type: 'logic', prompt: 'Select statement?', template: '', solution: 'Multiplex channels' }
+        ]
+    },
+    "Synchronization (Mutex, WaitGroup)": {
+        content: `<h3>Synchronization</h3><p>Mutex and WaitGroup for coordinating goroutines.</p>`,
+        videos: [{ title: "Go Sync - Code Monkey", url: "https://www.youtube.com/watch?v=K7jPfZ5u2Nk" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Declare Mutex', template: 'var mu _______', solution: 'sync.Mutex' },
+            { id: 2, type: 'output', prompt: 'Lock/Unlock?', template: '', solution: 'mu.Lock() / mu.Unlock()' },
+            { id: 3, type: 'modify', prompt: 'WaitGroup', template: '', solution: 'wg := sync.WaitGroup{}' },
+            { id: 4, type: 'fix', prompt: 'Fix Wait', template: 'wg.Done()', solution: 'wg.Wait()' },
+            { id: 5, type: 'logic', prompt: 'RWMutex purpose?', template: '', solution: 'Multiple readers, exclusive writer' }
+        ]
+    },
+    "Context Package": {
+        content: `<h3>Context Package</h3><p>Managing timeouts, cancellation across goroutines.</p>`,
+        videos: [{ title: "Go Context - Traversy", url: "https://www.youtube.com/watch?v=GSL5IcZEO64" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Create context', template: 'ctx := context._______', solution: 'Background()' },
+            { id: 2, type: 'output', prompt: 'Cancel context?', template: '', solution: 'ctx, cancel := context.WithCancel()' },
+            { id: 3, type: 'modify', prompt: 'Timeout context', template: 'WithCancel', solution: 'WithTimeout' },
+            { id: 4, type: 'fix', prompt: 'Fix context usage', template: 'ctx := context.BG()', solution: 'context.Background()' },
+            { id: 5, type: 'logic', prompt: 'Deadline context?', template: '', solution: 'WithDeadline' }
+        ]
+    },
+    "Memory Management": {
+        content: `<h3>Memory Management</h3><p>Understanding memory allocation and management in Go.</p>`,
+        videos: [{ title: "Go Memory - Code Monkey", url: "https://www.youtube.com/watch?v=1-WPfqgx8nk" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Stack vs heap?', template: '', solution: 'Stack local vars, heap dynamic' },
+            { id: 2, type: 'output', prompt: 'New vs make?', template: '', solution: 'new returns pointer, make returns value' },
+            { id: 3, type: 'modify', prompt: 'Escape analysis', template: '', solution: 'Compiler determines heap/stack' },
+            { id: 4, type: 'fix', prompt: 'Fix allocation', template: 'x := new([]int)', solution: 'x := make([]int)' },
+            { id: 5, type: 'logic', prompt: 'Memory leaks?', template: '', solution: 'Circular refs with GC' }
+        ]
+    },
+    "Garbage Collection": {
+        content: `<h3>Garbage Collection</h3><p>Automatic memory management and GC tuning in Go.</p>`,
+        videos: [{ title: "Go GC - Traversy", url: "https://www.youtube.com/watch?v=N2jKV26GjR8" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'GC in Go?', template: '', solution: 'Automatic, concurrent' },
+            { id: 2, type: 'output', prompt: 'Force GC?', template: '', solution: 'runtime.GC()' },
+            { id: 3, type: 'modify', prompt: 'GC percentage', template: '', solution: 'GOGC environment variable' },
+            { id: 4, type: 'fix', prompt: 'Fix memory', template: 'defer close(ch)', solution: 'Proper cleanup' },
+            { id: 5, type: 'logic', prompt: 'Pause time?', template: '', solution: 'Sub-millisecond typically' }
+        ]
+    },
+    "Performance Optimization": {
+        content: `<h3>Performance Optimization</h3><p>Writing fast Go code with profiling.</p>`,
+        videos: [{ title: "Go Optimization - Code Monkey", url: "https://www.youtube.com/watch?v=aV_VH5-AsL0" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Optimize slices', template: 'make([]int)', solution: 'make([]int, 0, cap)' },
+            { id: 2, type: 'output', prompt: 'Preallocate?', template: '', solution: 'Reduce allocations' },
+            { id: 3, type: 'modify', prompt: 'Use sync.Pool', template: '', solution: 'Reuse objects' },
+            { id: 4, type: 'fix', prompt: 'Fix loop', template: 'append in loop', solution: 'Preallocate' },
+            { id: 5, type: 'logic', prompt: 'Inlining?', template: '', solution: 'Compiler optimization' }
+        ]
+    },
+    "Profiling & Benchmarking": {
+        content: `<h3>Profiling & Benchmarking</h3><p>Measuring and analyzing Go program performance.</p>`,
+        videos: [{ title: "Go Profiling - Traversy", url: "https://www.youtube.com/watch?v=a-xC3qh-5-s" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Benchmark function', template: 'func Benchmark_______', solution: 'Name(b *testing.B)' },
+            { id: 2, type: 'output', prompt: 'Run benchmarks?', template: '', solution: 'go test -bench=.' },
+            { id: 3, type: 'modify', prompt: 'CPU profile', template: '', solution: 'pprof http server' },
+            { id: 4, type: 'fix', prompt: 'Fix benchmark', template: 'Bench()', solution: 'Benchmark()' },
+            { id: 5, type: 'logic', prompt: 'Memory profile?', template: '', solution: 'Allocations tracking' }
+        ]
+    },
+    "Networking & HTTP": {
+        content: `<h3>Networking & HTTP</h3><p>Building HTTP servers and clients in Go.</p>`,
+        videos: [{ title: "Go HTTP - Code Monkey", url: "https://www.youtube.com/watch?v=6eBKJnJaH_w" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'HTTP server', template: 'http.ListenAndServe(", _______)', solution: '":8080"' },
+            { id: 2, type: 'output', prompt: 'Handler function?', template: '', solution: 'func(w http.ResponseWriter, r *http.Request)' },
+            { id: 3, type: 'modify', prompt: 'HTTP client', template: '', solution: 'http.Get(), http.Post()' },
+            { id: 4, type: 'fix', prompt: 'Fix handler', template: 'http.HandleFunc("/"', solution: 'http.HandleFunc("/", handler)' },
+            { id: 5, type: 'logic', prompt: 'Router mux?', template: '', solution: 'http.ServeMux' }
+        ]
+    },
+    "Microservices with Go": {
+        content: `<h3>Microservices with Go</h3><p>Building microservice architectures in Go.</p>`,
+        videos: [{ title: "Go Microservices - Traversy", url: "https://www.youtube.com/watch?v=7ygoEpHVV3k" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'REST API in Go', template: '', solution: 'Use HTTP package + JSON' },
+            { id: 2, type: 'output', prompt: 'Framework?', template: '', solution: 'Gin, Echo, Fiber' },
+            { id: 3, type: 'modify', prompt: 'gRPC protocol', template: '', solution: 'Protocol buffers' },
+            { id: 4, type: 'fix', prompt: 'Fix API response', template: '', solution: 'json.Marshal()' },
+            { id: 5, type: 'logic', prompt: 'Service mesh?', template: '', solution: 'Istio, Linkerd' }
+        ]
+    },
+    "System Programming": {
+        content: `<h3>System Programming</h3><p>Low-level system interactions and OS calls in Go.</p>`,
+        videos: [{ title: "Go System - Code Monkey", url: "https://www.youtube.com/watch?v=MzjuYLlh0SI" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'OS package import', template: 'import "_______"', solution: '"os"' },
+            { id: 2, type: 'output', prompt: 'Environment var?', template: '', solution: 'os.Getenv("VAR")' },
+            { id: 3, type: 'modify', prompt: 'Signal handling', template: '', solution: 'signal.Notify()' },
+            { id: 4, type: 'fix', prompt: 'Fix exec', template: 'os.Exec()', solution: 'exec.Command()' },
+            { id: 5, type: 'logic', prompt: 'Exit code?', template: '', solution: 'os.Exit(code)' }
+        ]
+    },
+    "Go Runtime Internals": {
+        content: `<h3>Go Runtime Internals</h3><p>Understanding Go runtime scheduling and architecture.</p>`,
+        videos: [{ title: "Go Runtime - Traversy", url: "https://www.youtube.com/watch?v=qBCfAewqvFo" }],
+        questions: [
+            { id: 1, type: 'practice', prompt: 'Scheduler in Go?', template: '', solution: 'M:N (M threads, N goroutines)' },
+            { id: 2, type: 'output', prompt: 'GOMAXPROCS?', template: '', solution: 'Number of OS threads' },
+            { id: 3, type: 'modify', prompt: 'Runtime version', template: '', solution: 'runtime.Version()' },
+            { id: 4, type: 'fix', prompt: 'Fix goroutine count', template: '', solution: 'runtime.NumGoroutine()' },
+            { id: 5, type: 'logic', prompt: 'Work stealing?', template: '', solution: 'Scheduler load balancing' }
+        ]
+    }
+};
+
+const goAdvancedTitles = [
+    "Goroutines",
+    "Channels",
+    "Concurrency Patterns",
+    "Synchronization (Mutex, WaitGroup)",
+    "Context Package",
+    "Memory Management",
+    "Garbage Collection",
+    "Performance Optimization",
+    "Profiling & Benchmarking",
+    "Networking & HTTP",
+    "Microservices with Go",
+    "System Programming",
+    "Go Runtime Internals"
 ];
 
 export const MOCK_QUIZ = {
